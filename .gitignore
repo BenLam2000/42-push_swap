@@ -1,0 +1,17 @@
+# Ignore all files
+*
+
+# Except these folders
+!/src/
+!/include/
+!/libft/
+
+# Allow these files too
+# CAUTION: to allow files just using filenames not absolute path, make sure the parent folder is unignored first
+!/README.md
+
+# Re-ignore specific files within allowed directories
+/src/*.swp
+
+# Don't forget to allow this file itself!
+!/.gitignore
