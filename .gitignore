@@ -8,6 +8,7 @@
 
 # Allow these files too
 # CAUTION: to allow files just using filenames not absolute path, make sure the parent folder is unignored first
+!/src/*.c
 !/README.md
 
 # Re-ignore specific files within allowed directories
