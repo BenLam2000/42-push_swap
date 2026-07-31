@@ -6,40 +6,79 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/07/13 22:00:02 by belam            ###   ########.fr       */
+/*   Updated: 2026/07/31 15:42:50 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-typedef struct Node 
+typedef struct s_node 
 {
-	int			data;
-	struct Node	*next;
-} Node;
+	int					data;
+	struct s_node	*next;
+} t_node;
 
-typedef struct 
+typedef struct	s_stack
 {
-	Node	*head;
+	t_node	*head;
 	int		size;
-} Stack;
+} t_stack;
 
-
-void	print_stack(Stack stack)
+/*
+This function creates a new stack node,
+places data in it, then links it to NULL
+next node in the linked list will simply override NULL
+*/
+t_node	*create_node(int data)
 {
-	int	data;
-	Node *travel_ptr;
+	t_node	*new_node;
+
+	new_node = (t_node *)malloc(sizeof(t_node));
+	if (!new_node)
+		return (NULL);
+	new_node->data = data;
+	new_node->next = NULL;
+	return (new_node);
+}
+
+/*
+Create first node and fix stack head pointing to it (to return at the end),
+use another traverser pointer to build stack node by node,
+create new next node -> move to next node -> create new next node -> move to next node
+*/
+t_node	*create_stack(int nums[], int size)
+{
+	int		i;
+	t_node	*head;
+	t_node	*traverser;		
+
+	i = 0;
+	head = create_node(nums[i++]);
+	traverser = head;
+	while (i < size)
+	{
+		traverser->next = create_node(nums[i++]);
+		traverser = traverser->next;
+	}
+	return (head);
+}
+
+void	print_stack(t_stack stack)
+{
+	t_node	*traverser;
 
 	if (stack.head)
 	{
-		travel_ptr = stack.head;
-		printf("%d\n", travel_ptr->data);
+		traverser = stack.head;
+		printf("%d\n", traverser->data);
 	
-		while (travel_ptr->next)
+		while (traverser->next)
 		{
-			travel_ptr = travel_ptr->next;
+			traverser = traverser->next;
 			printf("|\n");
-			printf("%d\n", travel_ptr->data);
+			printf("%d\n", traverser->data);
 		}
 	}
 }
@@ -47,18 +86,23 @@ void	print_stack(Stack stack)
 
 int	main(void)
 {
-	Node node1 = {.data = 1, .next = NULL};
-	Node node2 = {.data = 2, .next = &node1};
-	Node node3 = {.data = 3, .next = &node2};
-	Node node4 = {.data = 5, .next = &node3};
-	Node node5 = {.data = 8, .next = &node4};
-	
-	Stack stack = {.head = &node5, .size = 5};
+	int		nums[] = {99, 0, 25, -38, 10, 7, 42};
+	t_stack	stack_a;
+	int		stack_size = sizeof(nums) / sizeof(nums[0]);
 
-	print_stack(stack);
+	printf("stack size: %d\n", stack_size);
+
+	if (stack_size < 2)
+	{	
+		write(2, "Error\n", 6);
+		return (1);
+	}
+
+	stack_a.head = create_stack(nums, stack_size);
+	stack_a.size = stack_size;
+
+	print_stack(stack_a);
 
 
 	return (0);
 }
-
-

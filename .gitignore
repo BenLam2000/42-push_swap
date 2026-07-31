@@ -10,6 +10,7 @@
 # CAUTION: to allow files just using filenames not absolute path, make sure the parent folder is unignored first
 !/src/*.c
 !/README.md
+!/checker_linux
 
 # Re-ignore specific files within allowed directories
 /src/*.swp
