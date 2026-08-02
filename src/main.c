@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/07/31 15:42:50 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/02 16:27:22 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 
 typedef struct s_node 
 {
-	int					data;
+	int				data;
 	struct s_node	*next;
+	struct s_node	*prev;
 } t_node;
 
 typedef struct	s_stack
 {
 	t_node	*head;
+	t_node	*tail;
 	int		size;
 } t_stack;
 
@@ -31,7 +33,7 @@ This function creates a new stack node,
 places data in it, then links it to NULL
 next node in the linked list will simply override NULL
 */
-t_node	*create_node(int data)
+t_node	*create_node(int data, t_node *prev)
 {
 	t_node	*new_node;
 
@@ -39,6 +41,7 @@ t_node	*create_node(int data)
 	if (!new_node)
 		return (NULL);
 	new_node->data = data;
+	new_node->prev = prev;
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -48,21 +51,29 @@ Create first node and fix stack head pointing to it (to return at the end),
 use another traverser pointer to build stack node by node,
 create new next node -> move to next node -> create new next node -> move to next node
 */
-t_node	*create_stack(int nums[], int size)
+int	create_stack(int nums[], int size, t_stack *stack_ptr)
 {
 	int		i;
 	t_node	*head;
 	t_node	*traverser;		
 
 	i = 0;
-	head = create_node(nums[i++]);
+	head = create_node(nums[i++], NULL);
+	if (!head)
+		return (0);
 	traverser = head;
 	while (i < size)
 	{
-		traverser->next = create_node(nums[i++]);
+		traverser->next = create_node(nums[i], traverser);
+		if (!(traverser->next))
+			return (0);
 		traverser = traverser->next;
+		i++;
 	}
-	return (head);
+	stack_ptr->head = head;
+	stack_ptr->tail = traverser;
+	stack_ptr->size = size;
+	return (1);
 }
 
 void	print_stack(t_stack stack)
@@ -93,13 +104,10 @@ int	main(void)
 	printf("stack size: %d\n", stack_size);
 
 	if (stack_size < 2)
-	{	
-		write(2, "Error\n", 6);
 		return (1);
-	}
 
-	stack_a.head = create_stack(nums, stack_size);
-	stack_a.size = stack_size;
+	if (!create_stack(nums, stack_size, &stack_a))
+		return (1);
 
 	print_stack(stack_a);
 

@@ -6,22 +6,43 @@ Presents the project, including its goal and a brief overview.
 
 # [Feature List]
 
+# [Topics covered]
+
+- linked lists
+
+- bit shifting
+
+- sorting algorithms
+
 # [Usage Examples]
 
 # Instructions
 
 Any relevant information about how others can compile, install, and/or execute your project.
 
-# [Technical Choices]
+# Technical Choices
 
 push: add item to top of stack
 pop: remove item from top of stack and return value of removed item
 
-- stack implementation: linked list instead of array
-  - size of stack fixed at compile time: array / linked list both viable
+### stack implementation
+
+- **linked list** vs array
+  - size of stack known only at runtime (user input arguments): fixed size array not possible, must use malloc (array or linked list)
+  - each node will not only contain num, also other info, so structs can group data for each node neatly without needing multiple arrays for each data
   - to do rotate:
     - array: waste a lot of computation to move all numbers up, since array size is fixed
     - liked list: free to add node at other end and just switch pointers to change stack head
+
+- singly vs **doubly** linked list
+  - doubly is useful when you need to traverse backwards, singly would have to traverse whole linked list
+  - pointer to previous node comes in handy for setting 2nd last node to point to NULL and set it as new TAIL when reverse rotate
+- circular vs **non-circular** doubly linked list
+  - boundary conditions might be harder to check for circular, whereas non-circular only needs to check for NULL
+  - circular requires more pointer "surgery" when removing/inserting nodes
+- reference pointers:
+  - HEAD
+  - TAIL
 
 # Findings
 
@@ -41,22 +62,27 @@ pop: remove item from top of stack and return value of removed item
 
 List of classic references related to the topic (documentation, articles, tutorials, etc.), as well as a description of how AI was used — specifying for which tasks and which parts of the project.
 
+- [push swap tutorial - Thuggonaut](https://youtu.be/wRvipSG4Mmk?si=JCr7SIRVP9npqGqh)
 - [Stacks](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
+- [singly vs doubly linked lists](https://www.reddit.com/r/learnprogramming/comments/yh3c4d/singly_linked_list_vs_doubly_linked_list/)
 
+# Tasks
 
+### Done:
 
-# Todo
-
-## Today:
-
-- [x] learn how to create nodes, and join nodes to form  linked list
+- [x] learn how to create nodes, and join nodes to form singly linked list
 
 - [x] automate linked list creation from an array of integers
-- [ ] code all operations and test each one
 
+### Today:
 
+- [x] convert singly to non-circular doubly linked list
 
+- [ ] code all operations
 
+- [ ] test all operations (with stack A and B)
+
+### Todo:
 
 - [ ] draft the overall structure (pseudocode) for turk
 
@@ -66,10 +92,8 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - [ ] input validation
 
-
-
 # Functions
 
-- [ ] create_stack_node
+- [x] create_stack_node
 
 - [ ] create_stack
