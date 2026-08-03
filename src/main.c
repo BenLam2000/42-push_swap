@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/02 22:08:47 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/03 15:09:27 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,22 +126,25 @@ void	swap(t_stack *stack)
 	stack->head = node2;
 }
 
+/*
 void	swap_a()
 {
 	
 }
+*/
 
+/*
 int	push_swap()
 {
-	int		*stack_a_nums = (int *)malloc(sizeof(int) * 3); //{99, 0, 25};
+	//int		*stack_a_nums = (int *)malloc(sizeof(int) * 3); //{99, 0, 25};
 	//int		stack_b_nums[] = {-38, 10, 7, 42};
-	int		stack_a_size = sizeof(stack_a_nums) / sizeof(stack_a_nums[0]);
+	//int		stack_a_size = sizeof(stack_a_nums) / sizeof(stack_a_nums[0]);
 	//int		stack_b_size = sizeof(stack_b_nums) / sizeof(stack_b_nums[0]);
 	//t_stack	stack_a;
 	//t_stack	stack_b;
 
-	printf("stack size: %d\n", stack_a_size);
-/*
+	//printf("stack size: %d\n", stack_a_size);
+
 	if (stack_a_size < 2)
 		return (1);
 
@@ -158,12 +161,103 @@ int	push_swap()
 
 	print_stack(&stack_a);
 	print_stack(&stack_b);
+
+}
 */
+
+/*
+This function accepts input numbers with multiple consecutive spaces
+1. loop through whole string to check how many words
+2. allocate memory for char * array
+*/
+char	**ft_split(char const *s, char c)
+{
+	int	word_count;
+	int	i;
+	int	new_word;
+
+	word_count = 0;
+	new_word = 1;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			new_word = 1;
+		else
+		{
+			if (new_word)
+			{
+				word_count++;
+				new_word = 0;
+			}
+		}
+		i++;
+	}
+	printf("word count: %d\n", word_count);
+
+	word_arr = (char **)malloc(sizeof(char *) * (word_count + 1));
+
+	word_count = 0;
+	char_count = 0;
+	new_word = 1;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+		{
+			new_word = 1;
+			word_arr[word_count - 1] = (char *)malloc(sizeof(char) * (char_count + 1));
+		}
+		else
+		{
+			if (new_word)
+			{
+				word_count++;
+				new_word = 0;
+				char_count = 0;
+			}
+			char_count++;
+		}
+		i++;
+	}
+	word_arr[word_count] = NULL;
+	
+	word_count = 0;
+	word_i = 0;
+	new_word = 1;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+		{
+			word_arr[word_count][word_i] = '\0';
+			new_word = 1;
+		}
+		else
+		{
+			if (new_word)
+			{
+				word_count++;
+				new_word = 0;
+				word_i = 0;
+			}
+			word_arr[word_count - 1][word_i] = s[i];
+			word_i++;
+		}
+		i++;
+	}
+	word_arr[word_count - 1][word_i] = '\0';
+	return (word_arr);
 }
 
-int	main(void)
+
+int	main(int argc, char *argv[])
 {
-	push_swap();
+	if (argc == 2)
+		ft_split(argv[1], ' ');
+		//push_swap(argv[1]);
+	
+
 
 	return (0);
 }
