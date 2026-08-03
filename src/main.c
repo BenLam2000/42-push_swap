@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/03 15:09:27 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/03 17:09:47 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,24 @@ int	push_swap()
 
 }
 */
+
+
+int	ft_isdigit(int a)
+{
+	return (a >= '0' && a <= '9');
+}
+
+int	ft_atoi_imp(char *s, char **endptr)
+{
+	int	i;
+
+	i = 0;
+sign = 1;
+	if (s[i] == ' ')
+		i++;
+	if (s[i] == '-')
+	
+}
 
 /*
 This function accepts input numbers with multiple consecutive spaces
