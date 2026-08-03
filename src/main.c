@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/02 16:27:22 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/02 22:08:47 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,41 +76,94 @@ int	create_stack(int nums[], int size, t_stack *stack_ptr)
 	return (1);
 }
 
-void	print_stack(t_stack stack)
+void	print_stack(t_stack *stack)
 {
 	t_node	*traverser;
 
-	if (stack.head)
+	printf("forwards:\n");
+	if (stack->head)
 	{
-		traverser = stack.head;
-		printf("%d\n", traverser->data);
-	
-		while (traverser->next)
+		traverser = stack->head;
+		while (traverser)
 		{
+			printf("%4d\n", traverser->data);
+			printf("%4s\n", " | ");
 			traverser = traverser->next;
-			printf("|\n");
-			printf("%d\n", traverser->data);
 		}
 	}
+	printf("%4s\n", "NULL");
+
+	printf("backwards:\n");
+	if (stack->tail)
+	{
+		traverser = stack->tail;
+		while (traverser)
+		{
+			printf("%4d\n", traverser->data);
+			printf("%4s\n", " | ");
+			traverser = traverser->prev;
+		}
+	}
+	printf("%4s\n", "NULL");
 }
 
+/*
+This function swaps the top 2 nodes of a stack,
+detaching and reattaching *prev and *next pointers
+*/
+void	swap(t_stack *stack)
+{
+	t_node	*node1;
+	t_node	*node2;
+
+	node1 = stack->head;
+	node2 = stack->head->next;
+	node1->next = node2->next;
+	node2->next->prev = node1;
+	node2->next = node1;
+	node1->prev = node2;
+	node2->prev = NULL;
+	stack->head = node2;
+}
+
+void	swap_a()
+{
+	
+}
+
+int	push_swap()
+{
+	int		*stack_a_nums = (int *)malloc(sizeof(int) * 3); //{99, 0, 25};
+	//int		stack_b_nums[] = {-38, 10, 7, 42};
+	int		stack_a_size = sizeof(stack_a_nums) / sizeof(stack_a_nums[0]);
+	//int		stack_b_size = sizeof(stack_b_nums) / sizeof(stack_b_nums[0]);
+	//t_stack	stack_a;
+	//t_stack	stack_b;
+
+	printf("stack size: %d\n", stack_a_size);
+/*
+	if (stack_a_size < 2)
+		return (1);
+
+	if (!create_stack(stack_a_nums, stack_a_size, &stack_a))
+		return (1);
+	if (!create_stack(stack_b_nums, stack_b_size, &stack_b))
+		return (1);
+
+	print_stack(&stack_a);
+	print_stack(&stack_b);
+
+	swap(&stack_a);
+	swap(&stack_b);
+
+	print_stack(&stack_a);
+	print_stack(&stack_b);
+*/
+}
 
 int	main(void)
 {
-	int		nums[] = {99, 0, 25, -38, 10, 7, 42};
-	t_stack	stack_a;
-	int		stack_size = sizeof(nums) / sizeof(nums[0]);
-
-	printf("stack size: %d\n", stack_size);
-
-	if (stack_size < 2)
-		return (1);
-
-	if (!create_stack(nums, stack_size, &stack_a))
-		return (1);
-
-	print_stack(stack_a);
-
+	push_swap();
 
 	return (0);
 }
