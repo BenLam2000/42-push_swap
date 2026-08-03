@@ -44,6 +44,10 @@ pop: remove item from top of stack and return value of removed item
   - HEAD
   - TAIL: make accessing last node more efficient for rotate operations
 
+
+
+Input can be multiple arguments or single string (must use ft_split)
+
 # Findings
 
 - since final goal is to stack A in ascending order, stack A must be remained as in ascending order as possible
@@ -57,6 +61,24 @@ pop: remove item from top of stack and return value of removed item
 # Approaches
 
 1. use stack B as the "sorting ground for out of place numbers"
+
+
+
+# Tests
+
+- single string input
+
+- mutliple arguments input
+
+- input with non-integer (float)
+
+- input with overflow/underflow value
+
+- input with duplicate values
+
+- no input specified
+
+- number of values specified is < 2 (no need to sort)
 
 # Resources
 
@@ -79,9 +101,9 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - [x] convert singly to non-circular doubly linked list
 
-- [ ] settle input parsing (ft_split)
+- [ ] settle input parsing (string->ft_split/multiple arguments)
 
-- [ ] 
+- [ ] check with Hannah why checker linux doesn't work
 
 ### Todo:
 
