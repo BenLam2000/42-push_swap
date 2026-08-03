@@ -42,7 +42,7 @@ pop: remove item from top of stack and return value of removed item
   - circular requires more pointer "surgery" when removing/inserting nodes
 - reference pointers:
   - HEAD
-  - TAIL
+  - TAIL: make accessing last node more efficient for rotate operations
 
 # Findings
 
@@ -62,6 +62,7 @@ pop: remove item from top of stack and return value of removed item
 
 List of classic references related to the topic (documentation, articles, tutorials, etc.), as well as a description of how AI was used — specifying for which tasks and which parts of the project.
 
+- [subject](https://cdn.intra.42.fr/pdf/pdf/209331/en.subject.pdf)
 - [push swap tutorial - Thuggonaut](https://youtu.be/wRvipSG4Mmk?si=JCr7SIRVP9npqGqh)
 - [Stacks](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
 - [singly vs doubly linked lists](https://www.reddit.com/r/learnprogramming/comments/yh3c4d/singly_linked_list_vs_doubly_linked_list/)
@@ -78,11 +79,14 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - [x] convert singly to non-circular doubly linked list
 
-- [ ] code all operations
+- [ ] settle input parsing (ft_split)
 
-- [ ] test all operations (with stack A and B)
+- [ ] 
 
 ### Todo:
+
+- [ ] - [ ] code all operations
+- [ ] test all operations (with stack A and B)
 
 - [ ] draft the overall structure (pseudocode) for turk
 
@@ -94,6 +98,8 @@ List of classic references related to the topic (documentation, articles, tutori
 
 # Functions
 
-- [x] create_stack_node
+- [x] create_node
 
-- [ ] create_stack
+- [x] create_stack
+
+- [ ] 
