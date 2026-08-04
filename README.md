@@ -28,6 +28,7 @@ pop: remove item from top of stack and return value of removed item
 ### stack implementation
 
 - **linked list** vs array
+  
   - size of stack known only at runtime (user input arguments): fixed size array not possible, must use malloc (array or linked list)
   - each node will not only contain num, also other info, so structs can group data for each node neatly without needing multiple arrays for each data
   - to do rotate:
@@ -35,16 +36,19 @@ pop: remove item from top of stack and return value of removed item
     - liked list: free to add node at other end and just switch pointers to change stack head
 
 - singly vs **doubly** linked list
+  
   - doubly is useful when you need to traverse backwards, singly would have to traverse whole linked list
   - pointer to previous node comes in handy for setting 2nd last node to point to NULL and set it as new TAIL when reverse rotate
+
 - circular vs **non-circular** doubly linked list
+  
   - boundary conditions might be harder to check for circular, whereas non-circular only needs to check for NULL
   - circular requires more pointer "surgery" when removing/inserting nodes
+
 - reference pointers:
+  
   - HEAD
   - TAIL: make accessing last node more efficient for rotate operations
-
-
 
 Input can be multiple arguments or single string (must use ft_split)
 
@@ -57,12 +61,11 @@ Input can be multiple arguments or single string (must use ft_split)
 - swap is useful when there are 2 numbers that need to be swapped are right next to each other
 - any numbers within stack A still need to be rotated to the top regardless if the preceeding operation is swap or push, since both only happen at the top
 - are we allowed to peek at the full stack A and B integers? yes
+- 
 
 # Approaches
 
 1. use stack B as the "sorting ground for out of place numbers"
-
-
 
 # Tests
 
@@ -88,6 +91,8 @@ List of classic references related to the topic (documentation, articles, tutori
 - [push swap tutorial - Thuggonaut](https://youtu.be/wRvipSG4Mmk?si=JCr7SIRVP9npqGqh)
 - [Stacks](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
 - [singly vs doubly linked lists](https://www.reddit.com/r/learnprogramming/comments/yh3c4d/singly_linked_list_vs_doubly_linked_list/)
+- [singly linked lists - wikipedia](https://en.wikipedia.org/wiki/Linked_list#Singly_linked_list)
+- 
 
 # Tasks
 
@@ -108,6 +113,7 @@ List of classic references related to the topic (documentation, articles, tutori
 ### Todo:
 
 - [ ] - [ ] code all operations
+
 - [ ] test all operations (with stack A and B)
 
 - [ ] draft the overall structure (pseudocode) for turk
@@ -124,4 +130,58 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - [x] create_stack
 
-- [ ] 
+
+
+# What I learned
+
+### ft_atoi limitation
+
+- even if there are trailing non-digit characters (ex: "  +123**abc**"), as long as initial portion is valid, it will return the int (123), so there is no way of figuring out if the integer encompasses the full string / at least know where the first nond-digit character starts
+  
+  - solution: return the address of a pointer (char **) passed in as input that will indicate where the first non-digit character starts
+
+- if no number is found, atoi returns 0, which will be the same as if the number i '0', so there is no way to differentiate these 2 cases
+
+- no checks for overflow and underflow
+
+
+
+# Mistakes I Made
+
+
+
+# Requirements Checklist
+
+- [ ] input:
+  
+  - [x] integers can be negative
+  
+  - [ ] first argument at the top of stack
+  
+  - [ ] if no arguments specified, display nothing and return to prompt
+  
+  - [x] arguments not being integers (floating point/non-digit char) -> ERROR
+  
+  - [x] arguments exceeding INT_MAX / INT_MIN -> ERROR
+  
+  - [ ] arguments containing duplicates -> ERROR
+  
+  - [x] spaces at beginning and end -> ERROR
+  
+  - [x] consecutive spaces between numbers -> ERROR
+
+- [ ] instructions only separated by '\n'
+
+- [ ] number of instructions for 3 nums must be < 3
+
+- [ ] number of instructions for 5 nums must be > 12
+
+- [ ] program must compile wth makefile
+
+- [ ] no global variables
+
+
+
+# Program Flow
+
+1. Input validation (one full pass)

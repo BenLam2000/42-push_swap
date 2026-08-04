@@ -6,90 +6,11 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/04 13:26:57 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/04 16:37:28 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
-/*
-This function creates a new stack node,
-places data in it, then links it to NULL
-next node in the linked list will simply override NULL
-*/
-t_node	*create_node(int data, t_node *prev)
-{
-	t_node	*new_node;
-
-	new_node = (t_node *)malloc(sizeof(t_node));
-	if (!new_node)
-		return (NULL);
-	new_node->data = data;
-	new_node->prev = prev;
-	new_node->next = NULL;
-	return (new_node);
-}
-
-/*
-Create first node and fix stack head pointing to it (to return at the end),
-use another traverser pointer to build stack node by node,
-create new next node -> move to next node -> create new next node -> move to next node
-*/
-int	create_stack(int nums[], int size, t_stack *stack_ptr)
-{
-	int		i;
-	t_node	*head;
-	t_node	*traverser;		
-
-	i = 0;
-	head = create_node(nums[i++], NULL);
-	if (!head)
-		return (0);
-	traverser = head;
-	while (i < size)
-	{
-		traverser->next = create_node(nums[i], traverser);
-		if (!(traverser->next))
-			return (0);
-		traverser = traverser->next;
-		i++;
-	}
-	stack_ptr->head = head;
-	stack_ptr->tail = traverser;
-	stack_ptr->size = size;
-	return (1);
-}
-
-void	print_stack(t_stack *stack)
-{
-	t_node	*traverser;
-
-	printf("forwards:\n");
-	if (stack->head)
-	{
-		traverser = stack->head;
-		while (traverser)
-		{
-			printf("%4d\n", traverser->data);
-			printf("%4s\n", " | ");
-			traverser = traverser->next;
-		}
-	}
-	printf("%4s\n", "NULL");
-
-	printf("backwards:\n");
-	if (stack->tail)
-	{
-		traverser = stack->tail;
-		while (traverser)
-		{
-			printf("%4d\n", traverser->data);
-			printf("%4s\n", " | ");
-			traverser = traverser->prev;
-		}
-	}
-	printf("%4s\n", "NULL");
-}
 
 /*
 This function swaps the top 2 nodes of a stack,
@@ -149,24 +70,108 @@ int	push_swap()
 }
 */
 
-/*
-int	ft_isdigit(int a)
+
+int	ft_isdigit(char a)
 {
 	return (a >= '0' && a <= '9');
 }
 
+/*
+This function checks sign and int only, no spaces
+*/
 int	ft_atoi_imp(char *s, char **endptr)
 {
 	int	i;
+	int	sign;
+	int	num;
 
 	i = 0;
-sign = 1;
-	if (s[i] == ' ')
+	sign = 1;
+	if (s[i] == '-' || s[i] == '+')
+	{
+		if (s[i] == '-')
+			sign = -1;
 		i++;
-	if (s[i] == '-')
-	
+	}
+	num = 0;
+	while (ft_isdigit(s[i]))
+	{
+		if (sign == 1 && num > (INT_MAX - (s[i] - '0')) / 10)
+			break;
+		else if (sign == -1 && -num < (INT_MIN + (s[i] - '0')) / 10)
+			break;
+		num = num * 10 + (s[i] - '0');
+		i++;
+	}
+	*endptr = s + i;
+	return (sign * num);
 }
+
+/*
+error code:
+1 - non-digit character
+2 - space at the end or beginning
+3 - multiple spaces
+4 - overflow / underflow
 */
+int	input_is_invalid(char **endptr)
+{
+	int		num_count;
+
+	if (**endptr == ' ')
+		return (2);
+	num_count = 0;
+	while (**endptr)
+	{
+		ft_atoi_imp(*endptr, endptr);
+		if (**endptr == ' ' || **endptr == '\0')
+		{
+			num_count++;
+			if (**endptr == ' ')
+			{
+				if (*(*endptr + 1) == '\0')
+					return (2);
+				else if (*(*endptr + 1) == ' ')
+					return (3);
+				(*endptr)++;
+			}
+		}
+		else if (ft_isdigit(**endptr))
+			return (4);
+		else
+			return (1);
+	}
+	return (0);
+}
+/*
+0,2,4 should be numbers
+1,3,5 should be spaces (does not allow consecutive spaces, start or end)
+returns: number count placed in array OR -1 if invalid inputs
+the prevention of increment at '\0' prevents the next while check to derefence out of bounds
+*/
+int	parse_input(char **endptr, int *nums)
+{
+	int		num_count;
+	int		num;
+
+	num_count = 0;
+	while (**endptr)
+	{
+		num = ft_atoi_imp(*endptr, endptr);
+		if (**endptr == ' ' || **endptr == '\0')
+		{
+			nums[num_count] = num;
+			num_count++;
+			if (**endptr == ' ')
+				(*endptr)++;
+		}
+		else
+			return (-1);
+	}
+	if (*(*endptr - 1) == ' ')
+		return (-1);
+	return (num_count);
+}
 
 /*
 This function accepts input numbers with multiple consecutive spaces
@@ -258,10 +263,29 @@ char	**ft_split(char const *s, char c)
 
 int	main(int argc, char *argv[])
 {
+	char	*input = argv[1];
+	char	**endptr = &input;
+	//int		num_count;
+	//int		*nums;
+
 	if (argc == 2)
-		ft_split(argv[1], ' ');
+	{
+	/*
+		printf("%d\n", ft_atoi_imp(input, endptr));
+		if (**endptr == '\0')
+			printf("number takes up whole string");
+		else if (**endptr == ' ')
+			printf("preparing to check next number");
+		else
+			printf("invalid number! exit");
+	*/
+
+		printf("%d", input_is_invalid(endptr));
+		//num_count = parse_input(endptr, nums);
+
+		//ft_split(argv[1], ' ');
 		//push_swap(argv[1]);
-	
+	}
 
 
 	return (0);
