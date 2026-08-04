@@ -6,27 +6,11 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/03 17:09:47 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/04 13:26:57 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-typedef struct s_node 
-{
-	int				data;
-	struct s_node	*next;
-	struct s_node	*prev;
-} t_node;
-
-typedef struct	s_stack
-{
-	t_node	*head;
-	t_node	*tail;
-	int		size;
-} t_stack;
+#include "main.h"
 
 /*
 This function creates a new stack node,
@@ -165,7 +149,7 @@ int	push_swap()
 }
 */
 
-
+/*
 int	ft_isdigit(int a)
 {
 	return (a >= '0' && a <= '9');
@@ -182,6 +166,7 @@ sign = 1;
 	if (s[i] == '-')
 	
 }
+*/
 
 /*
 This function accepts input numbers with multiple consecutive spaces
@@ -190,9 +175,11 @@ This function accepts input numbers with multiple consecutive spaces
 */
 char	**ft_split(char const *s, char c)
 {
-	int	word_count;
-	int	i;
-	int	new_word;
+	int		i;
+	int		new_word;
+	char	**word_arr;
+	int		word_count;
+	int		char_count;
 
 	word_count = 0;
 	new_word = 1;
@@ -241,14 +228,14 @@ char	**ft_split(char const *s, char c)
 	word_arr[word_count] = NULL;
 	
 	word_count = 0;
-	word_i = 0;
+	char_count = 0;
 	new_word = 1;
 	i = 0;
 	while (s[i])
 	{
 		if (s[i] == c)
 		{
-			word_arr[word_count][word_i] = '\0';
+			word_arr[word_count][char_count] = '\0';
 			new_word = 1;
 		}
 		else
@@ -257,14 +244,14 @@ char	**ft_split(char const *s, char c)
 			{
 				word_count++;
 				new_word = 0;
-				word_i = 0;
+				char_count = 0;
 			}
-			word_arr[word_count - 1][word_i] = s[i];
-			word_i++;
+			word_arr[word_count - 1][char_count] = s[i];
+			char_count++;
 		}
 		i++;
 	}
-	word_arr[word_count - 1][word_i] = '\0';
+	word_arr[word_count - 1][char_count] = '\0';
 	return (word_arr);
 }
 
