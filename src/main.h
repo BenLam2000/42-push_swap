@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:18:57 by belam             #+#    #+#             */
-/*   Updated: 2026/08/04 13:20:31 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/04 13:38:37 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,11 @@ typedef struct	s_stack
 	t_node	*tail;
 	int		size;
 } t_stack;
+
+t_node	*create_node(int data, t_node *prev);
+int		create_stack(int nums[], int size, t_stack *stack_ptr);
+void	print_stack(t_stack *stack);
+
+
+
+
