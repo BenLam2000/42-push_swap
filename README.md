@@ -92,7 +92,8 @@ List of classic references related to the topic (documentation, articles, tutori
 - [Stacks](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
 - [singly vs doubly linked lists](https://www.reddit.com/r/learnprogramming/comments/yh3c4d/singly_linked_list_vs_doubly_linked_list/)
 - [singly linked lists - wikipedia](https://en.wikipedia.org/wiki/Linked_list#Singly_linked_list)
-- 
+- [analysis of algorithms - wikipedia](https://en.wikipedia.org/wiki/Analysis_of_algorithms)
+- [sorting algorithm visualizer - visualgo](https://visualgo.net/en/sorting)
 
 # Tasks
 
@@ -130,8 +131,6 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - [x] create_stack
 
-
-
 # What I learned
 
 ### ft_atoi limitation
@@ -144,11 +143,7 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - no checks for overflow and underflow
 
-
-
 # Mistakes I Made
-
-
 
 # Requirements Checklist
 
@@ -179,8 +174,6 @@ List of classic references related to the topic (documentation, articles, tutori
 - [ ] program must compile wth makefile
 
 - [ ] no global variables
-
-
 
 # Program Flow
 
