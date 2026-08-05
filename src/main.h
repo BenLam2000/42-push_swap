@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:18:57 by belam             #+#    #+#             */
-/*   Updated: 2026/08/05 15:28:34 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/05 16:48:21 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ typedef struct	s_stack
 } t_stack;
 
 t_node	*create_node(int data, t_node *prev);
-int		input_to_stack(char **endptr, int size, t_stack *stack_ptr);
+int		input_to_stack(char **endptr, t_stack *stackptr);
 void	print_stack(t_stack *stack);
 int		ft_atoi_imp(char *s, char **endptr);
-int		input_is_invalid(char **endptr);
+int		input_is_invalid(char **endptr, t_stack *stackptr);
 
 

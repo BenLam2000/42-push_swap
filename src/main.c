@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/05 15:42:32 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/05 17:41:52 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,8 @@ void	swap_a()
 /*
 int	push_swap()
 {
-	//int		*stack_a_nums = (int *)malloc(sizeof(int) * 3); //{99, 0, 25};
-	//int		stack_b_nums[] = {-38, 10, 7, 42};
-	//int		stack_a_size = sizeof(stack_a_nums) / sizeof(stack_a_nums[0]);
-	//int		stack_b_size = sizeof(stack_b_nums) / sizeof(stack_b_nums[0]);
 	//t_stack	stack_a;
 	//t_stack	stack_b;
-
-	//printf("stack size: %d\n", stack_a_size);
 
 	if (stack_a_size < 2)
 		return (1);
@@ -121,7 +115,7 @@ error code:
 the prevention of increment at '\0' prevents the next while check to derefence out of bounds
 reason for invalid instead of valid (flip logic), so can represent many error codes
 */
-int	input_is_invalid(char **endptr)
+int	input_is_invalid(char **endptr, t_stack *stackptr)
 {
 	int		num_count;
 
@@ -148,21 +142,35 @@ int	input_is_invalid(char **endptr)
 		else
 			return (4);
 	}
+	stackptr->size = num_count;
 	return (0);
 }
 
+/*
+*/
 int	main(int argc, char *argv[])
 {
-	char	*input = argv[1];
-	char	**endptr = &input;
-	//int		num_count;
+	char	*input_start;
+	char	*input_traverser;
+	char	**endptr = &input_traverser;
 	t_stack	stack_a;
+	int		exit_code;
+
+	input_start = argv[1];
+	input_traverser = input_start;
 
 	if (argc == 1)
 		return (1);
 	
-	//input_is_invalid(endptr, &stack_a);
-	//input_to_stack(endptr, size, &stack_a);
+	exit_code = input_is_invalid(endptr, &stack_a);
+	if (exit_code)
+		return (exit_code);
+
+	input_traverser = input_start;
+	if (!input_to_stack(endptr, &stack_a))
+		return (8);
+
+	print_stack(&stack_a);
 	
 
 	//printf("%d", input_is_invalid(endptr));

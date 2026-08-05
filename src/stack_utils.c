@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:35:28 by belam             #+#    #+#             */
-/*   Updated: 2026/08/05 15:19:01 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/05 17:43:12 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,30 @@ Create first node and fix stack head pointing to it (to return at the end),
 use another traverser pointer to build stack node by node,
 create new next node -> move to next node -> create new next node -> move to next node
 */
-int	input_to_stack(char **endptr, int size, t_stack *stack_ptr)
+int	input_to_stack(char **endptr, t_stack *stackptr)
 {
 	int		i;
 	t_node	*head;
 	t_node	*traverser;
 
 	i = 0;
-	head = create_node(ft_atoi_imp(*endptr + i, endptr), NULL);
+	head = create_node(ft_atoi_imp(*endptr, endptr), NULL);
+	(*endptr)++;
 	i++;
 	if (!head)
 		return (0);
 	traverser = head;
-	while (i < size)
+	while (i < stackptr->size)
 	{
-		traverser->next = create_node(ft_atoi_imp(*endptr + i, endptr), traverser);
+		traverser->next = create_node(ft_atoi_imp(*endptr, endptr), traverser);
+		(*endptr)++;
 		if (!(traverser->next))
 			return (0);
 		traverser = traverser->next;
 		i++;
 	}
-	stack_ptr->head = head;
-	stack_ptr->tail = traverser;
-	stack_ptr->size = size;
+	stackptr->head = head;
+	stackptr->tail = traverser;
 	return (1);
 }
 
