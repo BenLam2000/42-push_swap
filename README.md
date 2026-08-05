@@ -4,6 +4,8 @@
 
 Presents the project, including its goal and a brief overview.
 
+main goal of the project is to prioritize move efficiency, okay to spend more computation to find the least number of moves, time and space complexity is not really the key thing here. The reason why turk's algo works so well is because of the cost calculating part, the rest is just basic insertion sort, which has complexity of n^2.
+
 # [Feature List]
 
 # [Topics covered]
@@ -87,7 +89,7 @@ Input can be multiple arguments or single string (must use ft_split)
 
 List of classic references related to the topic (documentation, articles, tutorials, etc.), as well as a description of how AI was used — specifying for which tasks and which parts of the project.
 
-- [subject](https://cdn.intra.42.fr/pdf/pdf/209331/en.subject.pdf)
+- [push swap subject](https://cdn.intra.42.fr/pdf/pdf/209331/en.subject.pdf)
 - [push swap tutorial - Thuggonaut](https://youtu.be/wRvipSG4Mmk?si=JCr7SIRVP9npqGqh)
 - [Stacks](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
 - [singly vs doubly linked lists](https://www.reddit.com/r/learnprogramming/comments/yh3c4d/singly_linked_list_vs_doubly_linked_list/)
@@ -103,11 +105,15 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - [x] automate linked list creation from an array of integers
 
-### Today:
-
 - [x] convert singly to non-circular doubly linked list
 
-- [ ] settle input parsing (string->ft_split/multiple arguments)
+- [ ] input validation
+
+- [ ] parse input string to num array
+
+### Today:
+
+- [ ] settle input parsing (string->/multiple arguments)
 
 - [ ] check with Hannah why checker linux doesn't work
 
@@ -151,19 +157,21 @@ List of classic references related to the topic (documentation, articles, tutori
   
   - [x] integers can be negative
   
+  - [ ] accepts input as multiple arguments or a single argument with all numbers
+  
   - [ ] first argument at the top of stack
   
-  - [ ] if no arguments specified, display nothing and return to prompt
+  - [x] if no arguments specified, display nothing and return to prompt (EXIT CODE: 1)
   
-  - [x] arguments not being integers (floating point/non-digit char) -> ERROR
+  - [ ] spaces at beginning or end -> ERROR (EXIT CODE: 2)
   
-  - [x] arguments exceeding INT_MAX / INT_MIN -> ERROR
+  - [ ] consecutive spaces between numbers -> ERROR (EXIT CODE: 3)
   
-  - [ ] arguments containing duplicates -> ERROR
+  - [ ] arguments not being integers (floating point/non-digit char) -> ERROR (EXIT CODE: 4)
   
-  - [x] spaces at beginning and end -> ERROR
+  - [ ] arguments exceeding INT_MAX / INT_MIN -> ERROR (EXIT CODE: 5)
   
-  - [x] consecutive spaces between numbers -> ERROR
+  - [ ] arguments containing duplicates -> ERROR (EXIT CODE: 6)
 
 - [ ] instructions only separated by '\n'
 

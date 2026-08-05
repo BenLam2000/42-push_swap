@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/04 16:37:28 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/05 15:42:32 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,16 +109,23 @@ int	ft_atoi_imp(char *s, char **endptr)
 
 /*
 error code:
-1 - non-digit character
 2 - space at the end or beginning
 3 - multiple spaces
-4 - overflow / underflow
+4 - non-digit character
+5 - overflow / underflow
+
+0,2,4 should be numbers
+1,3,5 should be spaces (does not allow consecutive spaces, start or end)
+// TODO refactor: too many nests
+// TODO refactor: go by odd/even
+the prevention of increment at '\0' prevents the next while check to derefence out of bounds
+reason for invalid instead of valid (flip logic), so can represent many error codes
 */
 int	input_is_invalid(char **endptr)
 {
 	int		num_count;
 
-	if (**endptr == ' ')
+	if ((*endptr)[0] == ' ')
 		return (2);
 	num_count = 0;
 	while (**endptr)
@@ -137,155 +144,31 @@ int	input_is_invalid(char **endptr)
 			}
 		}
 		else if (ft_isdigit(**endptr))
-			return (4);
+			return (5);
 		else
-			return (1);
+			return (4);
 	}
 	return (0);
 }
-/*
-0,2,4 should be numbers
-1,3,5 should be spaces (does not allow consecutive spaces, start or end)
-returns: number count placed in array OR -1 if invalid inputs
-the prevention of increment at '\0' prevents the next while check to derefence out of bounds
-*/
-int	parse_input(char **endptr, int *nums)
-{
-	int		num_count;
-	int		num;
-
-	num_count = 0;
-	while (**endptr)
-	{
-		num = ft_atoi_imp(*endptr, endptr);
-		if (**endptr == ' ' || **endptr == '\0')
-		{
-			nums[num_count] = num;
-			num_count++;
-			if (**endptr == ' ')
-				(*endptr)++;
-		}
-		else
-			return (-1);
-	}
-	if (*(*endptr - 1) == ' ')
-		return (-1);
-	return (num_count);
-}
-
-/*
-This function accepts input numbers with multiple consecutive spaces
-1. loop through whole string to check how many words
-2. allocate memory for char * array
-*/
-char	**ft_split(char const *s, char c)
-{
-	int		i;
-	int		new_word;
-	char	**word_arr;
-	int		word_count;
-	int		char_count;
-
-	word_count = 0;
-	new_word = 1;
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			new_word = 1;
-		else
-		{
-			if (new_word)
-			{
-				word_count++;
-				new_word = 0;
-			}
-		}
-		i++;
-	}
-	printf("word count: %d\n", word_count);
-
-	word_arr = (char **)malloc(sizeof(char *) * (word_count + 1));
-
-	word_count = 0;
-	char_count = 0;
-	new_word = 1;
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-		{
-			new_word = 1;
-			word_arr[word_count - 1] = (char *)malloc(sizeof(char) * (char_count + 1));
-		}
-		else
-		{
-			if (new_word)
-			{
-				word_count++;
-				new_word = 0;
-				char_count = 0;
-			}
-			char_count++;
-		}
-		i++;
-	}
-	word_arr[word_count] = NULL;
-	
-	word_count = 0;
-	char_count = 0;
-	new_word = 1;
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-		{
-			word_arr[word_count][char_count] = '\0';
-			new_word = 1;
-		}
-		else
-		{
-			if (new_word)
-			{
-				word_count++;
-				new_word = 0;
-				char_count = 0;
-			}
-			word_arr[word_count - 1][char_count] = s[i];
-			char_count++;
-		}
-		i++;
-	}
-	word_arr[word_count - 1][char_count] = '\0';
-	return (word_arr);
-}
-
 
 int	main(int argc, char *argv[])
 {
 	char	*input = argv[1];
 	char	**endptr = &input;
 	//int		num_count;
-	//int		*nums;
+	t_stack	stack_a;
 
-	if (argc == 2)
-	{
-	/*
-		printf("%d\n", ft_atoi_imp(input, endptr));
-		if (**endptr == '\0')
-			printf("number takes up whole string");
-		else if (**endptr == ' ')
-			printf("preparing to check next number");
-		else
-			printf("invalid number! exit");
-	*/
+	if (argc == 1)
+		return (1);
+	
+	//input_is_invalid(endptr, &stack_a);
+	//input_to_stack(endptr, size, &stack_a);
+	
 
-		printf("%d", input_is_invalid(endptr));
-		//num_count = parse_input(endptr, nums);
+	//printf("%d", input_is_invalid(endptr));
+	//num_count = parse_input(endptr, nums);
 
-		//ft_split(argv[1], ' ');
-		//push_swap(argv[1]);
-	}
+	//push_swap(argv[1]);
 
 
 	return (0);
