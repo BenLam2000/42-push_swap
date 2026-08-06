@@ -72,7 +72,7 @@ option 1: separate passes
 
 option 2: concurrent
 
-- 1st pass through input string
+- 1st pass through input string, for each parsed number:
   
   - validate input
   
@@ -139,9 +139,13 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - [x] convert singly to non-circular doubly linked list
 
-- [ ] input validation
+- [x] input validation (spaces, non-int, overflow/underflow)
 
-- [ ] parse input string to num array
+- [x] merge input parsing and stack building
+
+- [ ] check sorted
+
+- [ ] check duplicates
 
 ### Today:
 

@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/06 14:59:53 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/06 18:17:49 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	ft_atoi_imp(char *s, char **endptr)
 	return (sign * num);
 }
 
+
+
 int	is_invalid_space(char a, int count)
 {
 	return (count % 2 == 0 && (a == ' ' || a == '\0'));
@@ -145,6 +147,37 @@ int	is_input_invalid(char **endptr, int count)
 		return (0);
 }
 
+
+int	is_sorted(t_stack *stackptr)
+{
+	t_node	*traverser;
+
+	if (!(stackptr->head))
+		return (0);
+	traverser = stackptr->head;
+	while (traverser->next)
+	{
+		if (traverser->data > traverser->next->data)
+			return (0);
+		traverser = traverser->next;
+	}
+	return (6);
+}
+
+int	has_duplicate(t_stack *stackptr, int num)
+{
+	t_node	*traverser;
+
+	traverser = stackptr->head;
+	while (traverser)
+	{
+		if (traverser->data == num)
+			return (1);
+		traverser = traverser->next;
+	}
+	return (0);
+}
+
 /*
 */
 int	main(int argc, char *argv[])
@@ -153,7 +186,7 @@ int	main(int argc, char *argv[])
 	char	*input_traverser;
 	char	**endptr = &input_traverser;
 	t_stack	stack_a = {.head = NULL, .tail = NULL, .size = 0};
-	//int		exit_code;
+	int		exit_code;
 
 
 
@@ -162,9 +195,10 @@ int	main(int argc, char *argv[])
 
 	if (argc == 1)
 		return (1);
-	
-	if (!input_to_stack(endptr, &stack_a))
-		return (8);
+
+	exit_code = input_to_stack(endptr, &stack_a);
+	if (exit_code)
+		return (exit_code);
 
 	print_stack(&stack_a);
 	
