@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/05 17:41:52 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/06 14:59:53 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,49 +101,48 @@ int	ft_atoi_imp(char *s, char **endptr)
 	return (sign * num);
 }
 
+int	is_invalid_space(char a, int count)
+{
+	return (count % 2 == 0 && (a == ' ' || a == '\0'));
+}
+
+int	is_overflow_underflow(char a, int count)
+{
+	return (count % 2 == 1 && ft_isdigit(a));
+}
+
+int	is_non_int(char a, int count)
+{
+	return (count % 2 == 1 && a != ' ' && !ft_isdigit(a) && a != '\0');
+}
+
+int	is_valid_space(char a, int count)
+{
+	return (count % 2 == 1 && a == ' ');
+}
+
+
 /*
 error code:
-2 - space at the end or beginning
-3 - multiple spaces
-4 - non-digit character
-5 - overflow / underflow
+2 - space at the end or beginning, or consecutive spaces
+3 - non-digit character
+4 - overflow / underflow
 
 0,2,4 should be numbers
 1,3,5 should be spaces (does not allow consecutive spaces, start or end)
-// TODO refactor: too many nests
-// TODO refactor: go by odd/even
 the prevention of increment at '\0' prevents the next while check to derefence out of bounds
 reason for invalid instead of valid (flip logic), so can represent many error codes
 */
-int	input_is_invalid(char **endptr, t_stack *stackptr)
+int	is_input_invalid(char **endptr, int count)
 {
-	int		num_count;
-
-	if ((*endptr)[0] == ' ')
+	if (is_invalid_space(**endptr, count))
 		return (2);
-	num_count = 0;
-	while (**endptr)
-	{
-		ft_atoi_imp(*endptr, endptr);
-		if (**endptr == ' ' || **endptr == '\0')
-		{
-			num_count++;
-			if (**endptr == ' ')
-			{
-				if (*(*endptr + 1) == '\0')
-					return (2);
-				else if (*(*endptr + 1) == ' ')
-					return (3);
-				(*endptr)++;
-			}
-		}
-		else if (ft_isdigit(**endptr))
-			return (5);
-		else
-			return (4);
-	}
-	stackptr->size = num_count;
-	return (0);
+	else if (is_non_int(**endptr, count))
+		return (3);
+	else if (is_overflow_underflow(**endptr, count))
+		return (4);
+	else //if (is_valid_space(**endptr, count))
+		return (0);
 }
 
 /*
@@ -153,8 +152,10 @@ int	main(int argc, char *argv[])
 	char	*input_start;
 	char	*input_traverser;
 	char	**endptr = &input_traverser;
-	t_stack	stack_a;
-	int		exit_code;
+	t_stack	stack_a = {.head = NULL, .tail = NULL, .size = 0};
+	//int		exit_code;
+
+
 
 	input_start = argv[1];
 	input_traverser = input_start;
@@ -162,11 +163,6 @@ int	main(int argc, char *argv[])
 	if (argc == 1)
 		return (1);
 	
-	exit_code = input_is_invalid(endptr, &stack_a);
-	if (exit_code)
-		return (exit_code);
-
-	input_traverser = input_start;
 	if (!input_to_stack(endptr, &stack_a))
 		return (8);
 

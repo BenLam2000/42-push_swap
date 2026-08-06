@@ -54,6 +54,38 @@ pop: remove item from top of stack and return value of removed item
 
 Input can be multiple arguments or single string (must use ft_split)
 
+### Input parsing and stack building
+
+option 1: separate passes
+
+- 1st pass through input string to validate input & count numbers
+
+- allocate memory for array
+
+- 2nd pass through input string to store numbers into array
+
+- do duplicate checking on number array
+
+- if no duplicates, build stack using number array
+
+- cons: extra memory used for intermediate array
+
+option 2: concurrent
+
+- 1st pass through input string
+  
+  - validate input
+  
+  - check duplicates (traverse from head to latest node)
+  
+  - if no error, build new stack node
+  
+  - keep track of stack size / number count
+
+- pros: save memory, no intermedate array, stack itself becomes storage for duplicate checking
+
+- cons: if any error, need to be careful to free and destroy the whole stack node by node
+
 # Findings
 
 - since final goal is to stack A in ascending order, stack A must be remained as in ascending order as possible
@@ -119,7 +151,7 @@ List of classic references related to the topic (documentation, articles, tutori
 
 ### Todo:
 
-- [ ] - [ ] code all operations
+- [ ] code all operations
 
 - [ ] test all operations (with stack A and B)
 
@@ -163,15 +195,17 @@ List of classic references related to the topic (documentation, articles, tutori
   
   - [x] if no arguments specified, display nothing and return to prompt (EXIT CODE: 1)
   
-  - [ ] spaces at beginning or end -> ERROR (EXIT CODE: 2)
+  - [x] spaces at beginning or end -> ERROR (EXIT CODE: 2)
   
-  - [ ] consecutive spaces between numbers -> ERROR (EXIT CODE: 3)
+  - [x] consecutive spaces between numbers -> ERROR (EXIT CODE: 3)
   
-  - [ ] arguments not being integers (floating point/non-digit char) -> ERROR (EXIT CODE: 4)
+  - [x] arguments not being integers (floating point/non-digit char) -> ERROR (EXIT CODE: 4)
   
-  - [ ] arguments exceeding INT_MAX / INT_MIN -> ERROR (EXIT CODE: 5)
+  - [x] arguments exceeding INT_MAX / INT_MIN -> ERROR (EXIT CODE: 5)
   
   - [ ] arguments containing duplicates -> ERROR (EXIT CODE: 6)
+  
+  - [ ] input list already sorted -> ERROR (EXIT CODE: 7)
 
 - [ ] instructions only separated by '\n'
 
@@ -182,6 +216,20 @@ List of classic references related to the topic (documentation, articles, tutori
 - [ ] program must compile wth makefile
 
 - [ ] no global variables
+
+Exit Code:
+
+| Exit Code | Description                                        |
+| --------- |:-------------------------------------------------- |
+| 0         | OK!                                                |
+| 1         | No arguments given                                 |
+| 2         | Spaces at beginning or end of input                |
+| 3         | Consecutive spaces between numbers                 |
+| 4         | Arguments contain non-integers                     |
+| 5         | Arguments contain overflow / underflow             |
+| 6         | Arguments contain duplicates                       |
+| 7         | Input list is already sorted                       |
+| 8         | Error allocating memory during stack node creation |
 
 # Program Flow
 
