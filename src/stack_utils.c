@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:35:28 by belam             #+#    #+#             */
-/*   Updated: 2026/08/07 12:07:40 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/07 13:34:02 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,11 @@ int	input_to_stack(char **endptr, t_stack *stackptr)
 		exit_code = is_input_invalid(*endptr, endptr_prev);
 		if (exit_code)
 			return (exit_code);
-		
+
+		// prepare endptr for next parsing
 		if (**endptr)
 			(*endptr)++;
 
-/*
-		// check sorted, should only be checked after complete pass of input
-		exit_code = is_sorted(stackptr);
-		if (exit_code)
-			return (exit_code);
-*/
 		// check duplicates from HEAD to current node
 		if (has_duplicate(stackptr, num))
 			return (5);
@@ -69,7 +64,7 @@ int	input_to_stack(char **endptr, t_stack *stackptr)
 		// if no error, build new stack node
 		temp_node = create_node(num, stackptr->tail);
 		if (!(temp_node))
-			return (7);
+			return (8);
 		if (stackptr->size == 0)
 		{
 			stackptr->head = temp_node;
@@ -84,6 +79,13 @@ int	input_to_stack(char **endptr, t_stack *stackptr)
 		// increment stack size via stackptr directly
 		(stackptr->size)++;
 	}
+	// check list size has at least 2 numbers
+	if (stackptr->size < 2)
+		return (6);
+
+	// check sorted, should only be checked after complete pass of input
+	if (is_sorted(stackptr))
+		return (7);
 	return (0);
 }
 

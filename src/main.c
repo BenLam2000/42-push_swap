@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/07 12:33:09 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/07 13:22:44 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int	is_sorted(t_stack *stackptr)
 {
 	t_node	*traverser;
 
-	if (!(stackptr->head))
+	if (stackptr->size < 2)
 		return (0);
 	traverser = stackptr->head;
 	while (traverser->next)
@@ -156,7 +156,7 @@ int	is_sorted(t_stack *stackptr)
 			return (0);
 		traverser = traverser->next;
 	}
-	return (6);
+	return (1);
 }
 
 int	has_duplicate(t_stack *stackptr, int num)
@@ -193,7 +193,10 @@ int	main(int argc, char *argv[])
 
 	exit_code = input_to_stack(endptr, &stack_a);
 	if (exit_code)
+	{
+		write(2, "Error\n", 6);
 		return (exit_code);
+	}
 
 	print_stack(&stack_a);
 	
