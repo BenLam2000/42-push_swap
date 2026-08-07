@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:35:28 by belam             #+#    #+#             */
-/*   Updated: 2026/08/06 18:17:55 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/07 12:07:40 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,24 @@ create new next node -> move to next node -> create new next node -> move to nex
 */
 int	input_to_stack(char **endptr, t_stack *stackptr)
 {
-	int		count;
 	int		num;
 	int		exit_code;
 	t_node	*temp_node;
+	char	*endptr_prev;
 
-	count = 0;
-	// validate input
-	exit_code = is_input_invalid(endptr, count);
-	if (exit_code)
-		return (exit_code);
 	while (**endptr)
 	{
 		// parse input num
+		endptr_prev = *endptr;
 		num = ft_atoi_imp(*endptr, endptr);
-		count++;
 
 		// validate input
-		exit_code = is_input_invalid(endptr, count);
+		exit_code = is_input_invalid(*endptr, endptr_prev);
 		if (exit_code)
 			return (exit_code);
+		
 		if (**endptr)
-		{
 			(*endptr)++;
-			count++;
-		}
 
 /*
 		// check sorted, should only be checked after complete pass of input

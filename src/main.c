@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/06 18:17:49 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/07 12:33:09 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,31 +103,26 @@ int	ft_atoi_imp(char *s, char **endptr)
 
 
 
-int	is_invalid_space(char a, int count)
+int	is_invalid_space(char *endptr, char *endptr_prev)
 {
-	return (count % 2 == 0 && (a == ' ' || a == '\0'));
+	return ((endptr == endptr_prev && *endptr == ' ') ||\
+		(endptr > endptr_prev && *endptr == ' ' && *(endptr + 1) == '\0'));
 }
 
-int	is_overflow_underflow(char a, int count)
+int	is_non_int(char *endptr)
 {
-	return (count % 2 == 1 && ft_isdigit(a));
+	return (*endptr != ' ' && *endptr != '\0' && !ft_isdigit(*endptr));
 }
 
-int	is_non_int(char a, int count)
+int	is_overflow_underflow(char *endptr, char *endptr_prev)
 {
-	return (count % 2 == 1 && a != ' ' && !ft_isdigit(a) && a != '\0');
+	return (endptr > endptr_prev && ft_isdigit(*endptr));
 }
-
-int	is_valid_space(char a, int count)
-{
-	return (count % 2 == 1 && a == ' ');
-}
-
 
 /*
 error code:
 2 - space at the end or beginning, or consecutive spaces
-3 - non-digit character
+3 - non-int number
 4 - overflow / underflow
 
 0,2,4 should be numbers
@@ -135,15 +130,15 @@ error code:
 the prevention of increment at '\0' prevents the next while check to derefence out of bounds
 reason for invalid instead of valid (flip logic), so can represent many error codes
 */
-int	is_input_invalid(char **endptr, int count)
+int	is_input_invalid(char *endptr, char *endptr_prev)
 {
-	if (is_invalid_space(**endptr, count))
+	if (is_invalid_space(endptr, endptr_prev))
 		return (2);
-	else if (is_non_int(**endptr, count))
+	else if (is_non_int(endptr))
 		return (3);
-	else if (is_overflow_underflow(**endptr, count))
+	else if (is_overflow_underflow(endptr, endptr_prev))
 		return (4);
-	else //if (is_valid_space(**endptr, count))
+	else 
 		return (0);
 }
 

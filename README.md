@@ -95,7 +95,7 @@ option 2: concurrent
 - swap is useful when there are 2 numbers that need to be swapped are right next to each other
 - any numbers within stack A still need to be rotated to the top regardless if the preceeding operation is swap or push, since both only happen at the top
 - are we allowed to peek at the full stack A and B integers? yes
-- 
+- for sorting check, the error it should be catching is when the whole list of numbers is fully sorted, but there is no point checking halfway through because there is not enough info yet
 
 # Approaches
 
@@ -128,6 +128,12 @@ List of classic references related to the topic (documentation, articles, tutori
 - [singly linked lists - wikipedia](https://en.wikipedia.org/wiki/Linked_list#Singly_linked_list)
 - [analysis of algorithms - wikipedia](https://en.wikipedia.org/wiki/Analysis_of_algorithms)
 - [sorting algorithm visualizer - visualgo](https://visualgo.net/en/sorting)
+
+### AI Usage
+
+- perform input parsing, validation and duplicate checking concurrently with building stack nodes - [Chatgpt](https://chatgpt.com/share/6a7543b9-73b0-83ec-9ec8-2121d0ba5898)
+
+- 
 
 # Tasks
 
@@ -197,19 +203,17 @@ List of classic references related to the topic (documentation, articles, tutori
   
   - [ ] first argument at the top of stack
   
-  - [x] if no arguments specified, display nothing and return to prompt (EXIT CODE: 1)
+  - [x] if no arguments specified, display nothing and return to prompt
   
-  - [x] spaces at beginning or end -> ERROR (EXIT CODE: 2)
+  - [x] spaces at beginning or end, or consecutive space -> ERROR
   
-  - [x] consecutive spaces between numbers -> ERROR (EXIT CODE: 3)
+  - [x] arguments not being integers (floating point/non-digit char) -> ERROR
   
-  - [x] arguments not being integers (floating point/non-digit char) -> ERROR (EXIT CODE: 4)
-  
-  - [x] arguments exceeding INT_MAX / INT_MIN -> ERROR (EXIT CODE: 5)
-  
-  - [ ] arguments containing duplicates -> ERROR (EXIT CODE: 6)
-  
-  - [ ] input list already sorted -> ERROR (EXIT CODE: 7)
+  - [x] arguments exceeding INT_MAX / INT_MIN -> ERROR
+
+- [ ] arguments containing duplicates -> ERROR (EXIT CODE: 6)
+
+- [ ] input list already sorted -> ERROR (EXIT CODE: 7)
 
 - [ ] instructions only separated by '\n'
 
@@ -223,17 +227,16 @@ List of classic references related to the topic (documentation, articles, tutori
 
 Exit Code:
 
-| Exit Code | Description                                        |
-| --------- |:-------------------------------------------------- |
-| 0         | OK!                                                |
-| 1         | No arguments given                                 |
-| 2         | Spaces at beginning or end of input                |
-| 3         | Consecutive spaces between numbers                 |
-| 4         | Arguments contain non-integers                     |
-| 5         | Arguments contain overflow / underflow             |
-| 6         | Arguments contain duplicates                       |
-| 7         | Input list is already sorted                       |
-| 8         | Error allocating memory during stack node creation |
+| Exit Code | Description                                                       |
+| --------- |:----------------------------------------------------------------- |
+| 0         | OK!                                                               |
+| 1         | No arguments given                                                |
+| 2         | Spaces at beginning or end, or consecutive spaces between numbers |
+| 3         | Arguments contain non-integers                                    |
+| 4         | Arguments contain overflow / underflow                            |
+| 5         | Arguments contain duplicates                                      |
+| 6         | Input list is already sorted                                      |
+| 7         | Error allocating memory during stack node creation                |
 
 # Program Flow
 
