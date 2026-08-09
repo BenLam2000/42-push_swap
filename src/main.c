@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/07 13:22:44 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/07 20:04:38 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ int	main(int argc, char *argv[])
 	t_stack	stack_a = {.head = NULL, .tail = NULL, .size = 0};
 	int		exit_code;
 
-
+	printf("argc:%d\n", argc);
 
 	input_start = argv[1];
 	input_traverser = input_start;

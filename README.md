@@ -149,9 +149,9 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - [x] merge input parsing and stack building
 
-- [ ] check sorted
+- [x] check sorted
 
-- [ ] check duplicates
+- [x] check duplicates
 
 ### Today:
 
@@ -171,7 +171,7 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - [ ] implement turk main algorithm
 
-- [ ] input validation
+- [ ] 
 
 # Functions
 
@@ -201,7 +201,7 @@ List of classic references related to the topic (documentation, articles, tutori
   
   - [ ] accepts input as multiple arguments or a single argument with all numbers
   
-  - [ ] first argument at the top of stack
+  - [x] first argument at the top of stack
   
   - [x] if no arguments specified, display nothing and return to prompt
   
@@ -210,10 +210,10 @@ List of classic references related to the topic (documentation, articles, tutori
   - [x] arguments not being integers (floating point/non-digit char) -> ERROR
   
   - [x] arguments exceeding INT_MAX / INT_MIN -> ERROR
-
-- [ ] arguments containing duplicates -> ERROR (EXIT CODE: 6)
-
-- [ ] input list already sorted -> ERROR (EXIT CODE: 7)
+  
+  - [x] arguments containing duplicates -> ERROR
+  
+  - [x] input list already sorted -> ERROR
 
 - [ ] instructions only separated by '\n'
 
@@ -235,8 +235,9 @@ Exit Code:
 | 3         | Arguments contain non-integers                                    |
 | 4         | Arguments contain overflow / underflow                            |
 | 5         | Arguments contain duplicates                                      |
-| 6         | Input list is already sorted                                      |
-| 7         | Error allocating memory during stack node creation                |
+| 6         | Input numbers / stack size <= 1                                   |
+| 7         | Input list is already sorted                                      |
+| 8         | Error allocating memory during stack node creation                |
 
 # Program Flow
 
