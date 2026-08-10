@@ -96,6 +96,7 @@ option 2: concurrent
 - any numbers within stack A still need to be rotated to the top regardless if the preceeding operation is swap or push, since both only happen at the top
 - are we allowed to peek at the full stack A and B integers? yes
 - for sorting check, the error it should be catching is when the whole list of numbers is fully sorted, but there is no point checking halfway through because there is not enough info yet
+- can only check sorted and size <= 1 after one full pass through input string
 
 # Approaches
 
@@ -227,17 +228,17 @@ List of classic references related to the topic (documentation, articles, tutori
 
 Exit Code:
 
-| Exit Code | Description                                                       |
-| --------- |:----------------------------------------------------------------- |
-| 0         | OK!                                                               |
-| 1         | No arguments given                                                |
-| 2         | Spaces at beginning or end, or consecutive spaces between numbers |
-| 3         | Arguments contain non-integers                                    |
-| 4         | Arguments contain overflow / underflow                            |
-| 5         | Arguments contain duplicates                                      |
-| 6         | Input numbers / stack size <= 1                                   |
-| 7         | Input list is already sorted                                      |
-| 8         | Error allocating memory during stack node creation                |
+| Exit Code | Description                                        |
+| --------- |:-------------------------------------------------- |
+| 0         | OK!                                                |
+| 1         | No arguments given                                 |
+| 2         | Spaces at beginning or end, or consecutive spaces  |
+| 3         | Arguments contain non-integers                     |
+| 4         | Arguments contain overflow / underflow             |
+| 5         | Arguments contain duplicates                       |
+| 6         | Input list is already sorted                       |
+| 7         | Error allocating memory during stack node creation |
+| 8         | stack size <= 1                                    |
 
 # Program Flow
 
