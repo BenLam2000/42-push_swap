@@ -215,6 +215,14 @@ List of classic references related to the topic (documentation, articles, tutori
   - [x] arguments containing duplicates -> ERROR
   
   - [x] input list already sorted -> ERROR
+  
+  - [ ] example acceptable arguments:
+    
+    - [ ] 2 3 4 5
+    
+    - [ ] "2 3 4 5"
+    
+    - [ ] 2 "3 4" 5
 
 - [ ] instructions only separated by '\n'
 
@@ -242,4 +250,7 @@ Exit Code:
 
 # Program Flow
 
-1. Input validation (one full pass)
+1. loop through all argc, for each arg:
+   1. parse input -> validate input -> check duplicates with previous nodes -> build node
+   2. if at any point error -> free all previous nodes in stack and return
+2. if stack successfully built -> check sorted -> if fail free stack and return also
