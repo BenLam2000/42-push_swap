@@ -6,11 +6,11 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:35:28 by belam             #+#    #+#             */
-/*   Updated: 2026/08/10 16:25:29 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/17 16:57:07 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "push_swap.h"
 
 /*
 This function creates a new stack node,
@@ -100,7 +100,7 @@ void	print_stack(t_stack *stack)
 		while (traverser)
 		{
 			printf("%4d\n", traverser->data);
-			printf("%4s\n", " | ");
+			//printf("%4s\n", " | ");
 			traverser = traverser->next;
 		}
 	}
@@ -113,7 +113,7 @@ void	print_stack(t_stack *stack)
 		while (traverser)
 		{
 			printf("%4d\n", traverser->data);
-			printf("%4s\n", " | ");
+			//printf("%4s\n", " | ");
 			traverser = traverser->prev;
 		}
 	}

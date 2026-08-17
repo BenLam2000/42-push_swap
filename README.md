@@ -97,6 +97,14 @@ option 2: concurrent
 - are we allowed to peek at the full stack A and B integers? yes
 - for sorting check, the error it should be catching is when the whole list of numbers is fully sorted, but there is no point checking halfway through because there is not enough info yet
 - can only check sorted and size <= 1 after one full pass through input string
+- How to use ./checker_linux properly:
+  - based on subject: ARG="3 2 1 0"; ./push_swap \$ARG | ./checker_OS \$ARG
+  - ./checker_linux "3 2 1 0" "\nrra\npb\nsa\nrra\npa"
+    - this will FAIL because ./checker_linux only accepts arguments
+    - "\n" in shell is not interpreted as newline, just literal '\' and 'n'
+  - echo -ne "rra\npb\nsa\nrra\npa\n" | ./checker_linux "3 2 1 0"
+    - this works because echo -ne enables interpretation of escape characters
+  - ./checker_linux "3 2 1 0" -> key in instructions (ENTER after each) -> CTRL+D after last instruction to signal end of input
 
 # Approaches
 
@@ -129,12 +137,13 @@ List of classic references related to the topic (documentation, articles, tutori
 - [singly linked lists - wikipedia](https://en.wikipedia.org/wiki/Linked_list#Singly_linked_list)
 - [analysis of algorithms - wikipedia](https://en.wikipedia.org/wiki/Analysis_of_algorithms)
 - [sorting algorithm visualizer - visualgo](https://visualgo.net/en/sorting)
+- [Piping in Unix or Linux](https://www.geeksforgeeks.org/linux-unix/piping-in-unix-or-linux/)
 
 ### AI Usage
 
 - perform input parsing, validation and duplicate checking concurrently with building stack nodes - [Chatgpt](https://chatgpt.com/share/6a7543b9-73b0-83ec-9ec8-2121d0ba5898)
 
-- 
+- object files not linking with libft library - [Gemini](https://share.google/aimode/UJrJ8j0SgjhvKgMUf)
 
 # Tasks
 
@@ -154,25 +163,23 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - [x] check duplicates
 
+- [x] figure out how checker works
+
 ### Today:
-
-- [ ] settle input parsing (string->/multiple arguments)
-
-- [ ] check with Hannah why checker linux doesn't work
-
-### Todo:
 
 - [ ] code all operations
 
 - [ ] test all operations (with stack A and B)
+
+### Todo:
+
+- [ ] settle input parsing (string->/multiple arguments)
 
 - [ ] draft the overall structure (pseudocode) for turk
 
 - [ ] write helper functions for turk
 
 - [ ] implement turk main algorithm
-
-- [ ] 
 
 # Functions
 
@@ -191,6 +198,26 @@ List of classic references related to the topic (documentation, articles, tutori
 - if no number is found, atoi returns 0, which will be the same as if the number i '0', so there is no way to differentiate these 2 cases
 
 - no checks for overflow and underflow
+
+### Piping (|)
+
+./checker_linux only accepts the list of integers as arguments on command line, but instructions from stdin (standard input). The reason
+
+`./push_swap \$ARG | ./checker_OS \$ARG"`
+
+works is because piping is a form of redirection that sends the stdout of the first command as stdin to the second command, so this simulates a user manually typing the instructions for ./checker_os. This is different than providing the instructions as a second argument to ./checker_os.
+
+### Library sequence in compilation
+
+cc main.o libft.a -o push_swap
+
+- OK
+
+cc libft.a main.o -o push_swap
+
+- KO
+
+make sure your main file is the first one and everything else follows order, dependencies also behind the source file that calls it
 
 # Mistakes I Made
 
@@ -244,9 +271,9 @@ Exit Code:
 | 3         | Arguments contain non-integers                     |
 | 4         | Arguments contain overflow / underflow             |
 | 5         | Arguments contain duplicates                       |
-| 6         | Input list is already sorted                       |
-| 7         | Error allocating memory during stack node creation |
-| 8         | stack size <= 1                                    |
+| 6         | stack size <= 1                                    |
+| 7         | Input list is already sorted                       |
+| 8         | Error allocating memory during stack node creation |
 
 # Program Flow
 

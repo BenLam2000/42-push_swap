@@ -6,11 +6,11 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/10 16:25:20 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/17 17:02:11 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "push_swap.h"
 
 /*
 This function swaps the top 2 nodes of a stack,
@@ -31,12 +31,14 @@ void	swap(t_stack *stack)
 	stack->head = node2;
 }
 
-/*
-void	swap_a()
+void	select_op(t_stack *stack_a, t_stack *stack_b, char *op)
 {
-	
+	if (ft_strncmp(op, "sa", 3) == 0)
+		swap(stack_a);
+	else if (ft_strncmp(op, "sb", 3) == 0)
+		swap(stack_b);
+	printf("%s\n", op);
 }
-*/
 
 /*
 int	push_swap()
@@ -64,11 +66,6 @@ int	push_swap()
 }
 */
 
-
-int	ft_isdigit(char a)
-{
-	return (a >= '0' && a <= '9');
-}
 
 /*
 This function checks sign and int only, no spaces
@@ -181,9 +178,10 @@ int	main(int argc, char *argv[])
 	char	*input_traverser;
 	char	**endptr = &input_traverser;
 	t_stack	stack_a = {.head = NULL, .tail = NULL, .size = 0};
+	t_stack	stack_b = {.head = NULL, .tail = NULL, .size = 0};
 	int		exit_code;
 
-	printf("argc:%d\n", argc);
+	//printf("argc:%d\n", argc);
 
 	input_start = argv[1];
 	input_traverser = input_start;
@@ -200,7 +198,9 @@ int	main(int argc, char *argv[])
 
 	print_stack(&stack_a);
 	
+	select_op(&stack_a, &stack_b, "sa");
 
+	print_stack(&stack_a);
 	//printf("%d", input_is_invalid(endptr));
 	//num_count = parse_input(endptr, nums);
 

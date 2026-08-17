@@ -8,10 +8,13 @@
 
 # Allow these files too
 # CAUTION: to allow files just using filenames not absolute path, make sure the parent folder is unignored first
-!/src/*.c
-!/src/*.h
+!/Makefile
 !/README.md
 !/checker_linux
+!/src/*.c
+!/include/*.h
+!/libft/*.c
+!/libft/Makefile
 
 # Re-ignore specific files within allowed directories
 /src/*.swp
