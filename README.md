@@ -105,6 +105,7 @@ option 2: concurrent
   - echo -ne "rra\npb\nsa\nrra\npa\n" | ./checker_linux "3 2 1 0"
     - this works because echo -ne enables interpretation of escape characters
   - ./checker_linux "3 2 1 0" -> key in instructions (ENTER after each) -> CTRL+D after last instruction to signal end of input
+- when doing pointer surgery on linked list, always check if the node is NULL if there is dereferencing involved (ex. stack->head->next)
 
 # Approaches
 
@@ -165,11 +166,19 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - [x] figure out how checker works
 
+- [x] build + project structure
+
 ### Today:
 
-- [ ] code all operations
-
-- [ ] test all operations (with stack A and B)
+- [ ] code and test all operations
+  
+  - [x] sa, sb, ss
+  
+  - [x] pa, pb
+  
+  - [ ] ra, rb, rr
+  
+  - [ ] rra, rrb, rrr
 
 ### Todo:
 
@@ -219,6 +228,10 @@ cc libft.a main.o -o push_swap
 
 make sure your main file is the first one and everything else follows order, dependencies also behind the source file that calls it
 
+### Using GDB to debug
+
+
+
 # Mistakes I Made
 
 # Requirements Checklist
@@ -251,6 +264,12 @@ make sure your main file is the first one and everything else follows order, dep
     
     - [ ] 2 "3 4" 5
 
+- [x] build
+  
+  - [x] libft.a created using its own makefile
+  
+  - [x] push_swap has its own Makefile that builds libft.a and its source files
+
 - [ ] instructions only separated by '\n'
 
 - [ ] number of instructions for 3 nums must be < 3
@@ -260,6 +279,12 @@ make sure your main file is the first one and everything else follows order, dep
 - [ ] program must compile wth makefile
 
 - [ ] no global variables
+
+- [ ] no memory leaks
+  
+  - [ ] must free both stacks before ending program
+  
+  - [ ] verify with valgrind
 
 Exit Code:
 

@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:35:28 by belam             #+#    #+#             */
-/*   Updated: 2026/08/17 16:57:07 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/18 19:16:23 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,33 +89,64 @@ int	input_to_stack(char **endptr, t_stack *stackptr)
 	return (0);
 }
 
-void	print_stack(t_stack *stack)
+void	print_stack(t_stack *stack_a, t_stack *stack_b)
 {
-	t_node	*traverser;
+	t_node	*a_traverser;
+	t_node	*b_traverser;
 
-	printf("forwards:\n");
-	if (stack->head)
+	//printf("forwards:\n");
+	printf("%5s\t%5s\n", "A", "B");
+	printf("-------------------\n");
+	if (stack_a->head || stack_b->head)
 	{
-		traverser = stack->head;
-		while (traverser)
+		a_traverser = stack_a->head;
+		b_traverser = stack_b->head;
+		while (a_traverser || b_traverser)
 		{
-			printf("%4d\n", traverser->data);
-			//printf("%4s\n", " | ");
-			traverser = traverser->next;
+			if (a_traverser)
+			{
+				printf("%5d", a_traverser->data);
+				a_traverser = a_traverser->next;
+			}
+			else
+				printf("%5s", "     ");
+			printf("\t");
+			if (b_traverser)
+			{
+				printf("%5d", b_traverser->data);
+				b_traverser = b_traverser->next;
+			}
+			else
+				printf("%5s", "     ");
+			printf("\n");
 		}
 	}
-	printf("%4s\n", "NULL");
 
-	printf("backwards:\n");
-	if (stack->tail)
+	//printf("backwards:\n");
+	//printf("%5s\t%5s\n", "A", "B");
+	printf("-------------------\n");
+	if (stack_a->tail || stack_b->tail)
 	{
-		traverser = stack->tail;
-		while (traverser)
+		a_traverser = stack_a->tail;
+		b_traverser = stack_b->tail;
+		while (a_traverser || b_traverser)
 		{
-			printf("%4d\n", traverser->data);
-			//printf("%4s\n", " | ");
-			traverser = traverser->prev;
+			if (a_traverser)
+			{
+				printf("%5d", a_traverser->data);
+				a_traverser = a_traverser->prev;
+			}
+			else
+				printf("%5s", "     ");
+			printf("\t");
+			if (b_traverser)
+			{
+				printf("%5d", b_traverser->data);
+				b_traverser = b_traverser->prev;
+			}
+			else
+				printf("%5s", "     ");
+			printf("\n");
 		}
 	}
-	printf("%4s\n", "NULL");
 }
