@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/17 17:02:11 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/18 12:43:31 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,80 +98,6 @@ int	ft_atoi_imp(char *s, char **endptr)
 	return (sign * num);
 }
 
-
-
-int	is_invalid_space(char *endptr, char *endptr_prev)
-{
-	return ((endptr == endptr_prev && *endptr == ' ') ||\
-		(endptr > endptr_prev && *endptr == ' ' && *(endptr + 1) == '\0'));
-}
-
-int	is_non_int(char *endptr)
-{
-	return (*endptr != ' ' && *endptr != '\0' && !ft_isdigit(*endptr));
-}
-
-int	is_overflow_underflow(char *endptr, char *endptr_prev)
-{
-	return (endptr > endptr_prev && ft_isdigit(*endptr));
-}
-
-/*
-error code:
-2 - space at the end or beginning, or consecutive spaces
-3 - non-int number
-4 - overflow / underflow
-
-0,2,4 should be numbers
-1,3,5 should be spaces (does not allow consecutive spaces, start or end)
-the prevention of increment at '\0' prevents the next while check to derefence out of bounds
-reason for invalid instead of valid (flip logic), so can represent many error codes
-*/
-int	is_input_invalid(char *endptr, char *endptr_prev)
-{
-	if (is_invalid_space(endptr, endptr_prev))
-		return (2);
-	else if (is_non_int(endptr))
-		return (3);
-	else if (is_overflow_underflow(endptr, endptr_prev))
-		return (4);
-	else 
-		return (0);
-}
-
-
-int	is_sorted(t_stack *stackptr)
-{
-	t_node	*traverser;
-
-	if (stackptr->size < 2)
-		return (0);
-	traverser = stackptr->head;
-	while (traverser->next)
-	{
-		if (traverser->data > traverser->next->data)
-			return (0);
-		traverser = traverser->next;
-	}
-	return (1);
-}
-
-int	has_duplicate(t_stack *stackptr, int num)
-{
-	t_node	*traverser;
-
-	traverser = stackptr->head;
-	while (traverser)
-	{
-		if (traverser->data == num)
-			return (1);
-		traverser = traverser->next;
-	}
-	return (0);
-}
-
-/*
-*/
 int	main(int argc, char *argv[])
 {
 	char	*input_start;
