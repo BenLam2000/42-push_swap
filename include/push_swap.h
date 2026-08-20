@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:18:57 by belam             #+#    #+#             */
-/*   Updated: 2026/08/18 19:10:13 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/20 20:08:26 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,4 @@ int		ft_atoi_imp(char *s, char **endptr);
 int		is_input_invalid(char *endptr, char *endptr_prev);
 int		is_sorted(t_stack *stackptr);
 int		has_duplicate(t_stack *stackptr, int num);
+void	select_op(t_stack *stack_a, t_stack *stack_b, char *op);

@@ -6,7 +6,7 @@
 #    By: belam <belam@student.42iskandarputeri.edu  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/26 03:07:24 by belam             #+#    #+#              #
-#    Updated: 2026/08/18 12:39:27 by belam            ###   ########.fr        #
+#    Updated: 2026/08/20 20:04:58 by belam            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ AR 			=	ar -crs
 RM 			=	rm -rf 
 
 LIBFT_A 	= 	$(BUILD_DIR)/libft.a
-SRC_FILES	=	main.c stack_utils.c input_validation.c input_validation2.c
+SRC_FILES	=	main.c stack_utils.c input_validation.c input_validation2.c op.c
 SRC 		=	$(addprefix $(SRC_DIR)/,$(SRC_FILES))
 OBJ_FILES	=	$(SRC_FILES:.c=.o)
 OBJ			= 	$(addprefix $(BUILD_DIR)/,$(OBJ_FILES))
