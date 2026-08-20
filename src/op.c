@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 20:03:57 by belam             #+#    #+#             */
-/*   Updated: 2026/08/20 20:06:04 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/20 21:21:19 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,65 @@ static void	push(t_stack *from_stack, t_stack *to_stack)
 	(to_stack->size)++;
 }
 
+// head and tail must exist since to rot must have >= 2 nodes
+static void	rot(t_stack *stack)
+{
+	t_node	*old_head;
+	t_node	*old_tail;
+
+	old_head = stack->head;
+	old_tail = stack->tail;
+	stack->head = stack->head->next;
+	stack->head->prev = NULL;
+	old_tail->next = old_head;
+	old_head->prev = old_tail;
+	old_head->next = NULL;
+	stack->tail = old_head;
+}
+
+// head and tail must exist since to rot must have >= 2 nodes
+static void	rev_rot(t_stack *stack)
+{
+	t_node	*old_tail;
+	t_node	*old_head;
+	t_node	*new_tail;
+
+	old_tail = stack->tail;
+	old_head = stack->head;
+	new_tail = stack->tail->prev;
+	stack->head = old_tail;
+	stack->head->prev = NULL;
+	stack->head->next = old_head;
+	stack->head->next->prev = old_tail;
+	new_tail->next = NULL;
+	stack->tail = new_tail;
+}
+
+
 // CHG SIZE back to 3
+// TODO: change to strcmp
 void	select_op(t_stack *stack_a, t_stack *stack_b, char *op)
 {
-	if ((!ft_strncmp(op, "sa", 2) || !ft_strncmp(op, "ss", 2)) && stack_a->size >= 2)
+	if ((!ft_strncmp(op, "sa", 3) || !ft_strncmp(op, "ss", 3)) && stack_a->size >= 2)
 		swap(stack_a);
-	if ((!ft_strncmp(op, "sb", 2) || !ft_strncmp(op, "ss", 2)) && stack_b->size >= 2)
+	if ((!ft_strncmp(op, "sb", 3) || !ft_strncmp(op, "ss", 3)) && stack_b->size >= 2)
 		swap(stack_b);
 
-	if (ft_strncmp(op, "pa", 2) == 0 && stack_b->size)
+	if (ft_strncmp(op, "pa", 3) == 0 && stack_b->size)
 		push(stack_b, stack_a);
-	else if (ft_strncmp(op, "pb", 2) == 0 && stack_a->size)
+	else if (ft_strncmp(op, "pb", 3) == 0 && stack_a->size)
 		push(stack_a, stack_b);
+
+	if ((!ft_strncmp(op, "ra", 3) || !ft_strncmp(op, "rr", 3)) && stack_a->size >= 2)
+		rot(stack_a);
+	if ((!ft_strncmp(op, "rb", 3) || !ft_strncmp(op, "rr", 3)) && stack_b->size >= 2)
+		rot(stack_b);
+
+	if ((!ft_strncmp(op, "rra", 3) || !ft_strncmp(op, "rrr", 3)) && stack_a->size >= 2)
+		rev_rot(stack_a);
+	if ((!ft_strncmp(op, "rrb", 3) || !ft_strncmp(op, "rrr", 3)) && stack_b->size >= 2)
+		rev_rot(stack_b);
+
 	printf("%s\n", op);
 	print_stack(stack_a, stack_b);
 }

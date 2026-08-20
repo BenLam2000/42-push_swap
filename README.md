@@ -168,27 +168,35 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - [x] build + project structure
 
-### Today:
-
-- [ ] code and test all operations
+- [x] code and test all operations
   
   - [x] sa, sb, ss
   
   - [x] pa, pb
   
-  - [ ] ra, rb, rr
+  - [x] ra, rb, rr
   
-  - [ ] rra, rrb, rrr
+  - [x] rra, rrb, rrr
+
+### Today:
+
+- [ ] draft the overall structure (pseudocode) for turk
+  
+  - [ ] cost calculation
+  
+  - [ ] 
+
+- [ ] write helper functions for turk
+  
+  - [ ] sort 3
+  
+  - [ ] sort 5
+
+- [ ] implement turk main algorithm
 
 ### Todo:
 
 - [ ] settle input parsing (string->/multiple arguments)
-
-- [ ] draft the overall structure (pseudocode) for turk
-
-- [ ] write helper functions for turk
-
-- [ ] implement turk main algorithm
 
 # Functions
 
@@ -230,7 +238,17 @@ make sure your main file is the first one and everything else follows order, dep
 
 ### Using GDB to debug
 
+### Framework for linked list pointer surgery
 
+1. draw out before and after of the operation for a simple linked list
+
+2. imagine nodes to be moved being yanked out, label all affected pointers from top to bottom
+
+3. declare temporary node variables for those that affected pointers come into contact with
+
+4. code pointer surgery operations
+
+5. add null checks for old node pointers that are dereferenced to avoid segfault
 
 # Mistakes I Made
 

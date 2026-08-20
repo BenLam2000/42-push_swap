@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/20 20:06:57 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/20 21:17:04 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	main(int argc, char *argv[])
 	}
 
 	print_stack(&stack_a, &stack_b);
-///*
+/*
 	char	buf[2];
 	int		bytes_read;
 
@@ -109,22 +109,22 @@ int	main(int argc, char *argv[])
 		bytes_read = read(0, buf, 2);
 		//printf("%d\n", bytes_read);
 	}
+*/
+///*
+	select_op(&stack_a, &stack_b, "pb");
+	select_op(&stack_a, &stack_b, "pb");
+	select_op(&stack_a, &stack_b, "pb");
+	select_op(&stack_a, &stack_b, "ra");
+	select_op(&stack_a, &stack_b, "rrb");
+	select_op(&stack_a, &stack_b, "rr");
+	select_op(&stack_a, &stack_b, "ss");
+	select_op(&stack_a, &stack_b, "rb");
+	select_op(&stack_a, &stack_b, "rra");
+	select_op(&stack_a, &stack_b, "rrr");
+	select_op(&stack_a, &stack_b, "pa");
+	select_op(&stack_a, &stack_b, "pa");
+	select_op(&stack_a, &stack_b, "pa");
 //*/
-/*
-	select_op(&stack_a, &stack_b, "pb");
-	select_op(&stack_a, &stack_b, "sa");
-*/
-/*
-	select_op(&stack_a, &stack_b, "pb");
-	select_op(&stack_a, &stack_b, "pb");
-	select_op(&stack_a, &stack_b, "pb");
-	select_op(&stack_a, &stack_b, "sb");
-	select_op(&stack_a, &stack_b, "pa");
-	select_op(&stack_a, &stack_b, "pa");
-	select_op(&stack_a, &stack_b, "sb");
-	select_op(&stack_a, &stack_b, "pa");
-	select_op(&stack_a, &stack_b, "pa");
-*/
 	//printf("%d", input_is_invalid(endptr));
 	//num_count = parse_input(endptr, nums);
 
