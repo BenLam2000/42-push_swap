@@ -133,6 +133,7 @@ List of classic references related to the topic (documentation, articles, tutori
 
 - [push swap subject](https://cdn.intra.42.fr/pdf/pdf/209331/en.subject.pdf)
 - [push swap tutorial - Thuggonaut](https://youtu.be/wRvipSG4Mmk?si=JCr7SIRVP9npqGqh)
+- [turk algorithm -medium](https://medium.com/@ayogun/push-swap-c1f5d2d41e97)
 - [Stacks](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
 - [singly vs doubly linked lists](https://www.reddit.com/r/learnprogramming/comments/yh3c4d/singly_linked_list_vs_doubly_linked_list/)
 - [singly linked lists - wikipedia](https://en.wikipedia.org/wiki/Linked_list#Singly_linked_list)
@@ -180,11 +181,55 @@ List of classic references related to the topic (documentation, articles, tutori
 
 ### Today:
 
+target node in stack, 
+
 - [ ] draft the overall structure (pseudocode) for turk
   
-  - [ ] cost calculation
+  - [ ] while stack A has more than 3 nodes:
+    
+    - [ ] push first 2 A nodes (similar to sorted stack in insertion sort)
+    
+    - [ ] assign each node in A a target node (closest smaller number / which number to put on top of) from B (so that B is constantly being sorted in descending order)
+    
+    - [ ] if no smaller number, target node is largest number (considering stacks are a loop, when sorted in descending order, the smallest number is always immediately above the largest number)
+    
+    - [ ] cost calculation, find which node is cheapest to push (ops to bring A node on top + ops to bring A's target node on top + 1 push op (cancelled out)), if found that cost is 0, straight away implement that
+      
+      - [ ] use rotate or reverse rotate only (if node is above halfway line, use rot, if below halfway line, use reverse rot)
+      
+      - [ ] if exactly on halfway line, follow the direction of the other, so that can use rr or rrr
+      
+      - [ ] if both A & B need to rotate in same direction, cost is the max of the 2 coz can rotate both simultaneously
+    
+    - [ ] repeat
   
-  - [ ] 
+  - [ ] sort 3
+    
+    - [ ] max number at bottom
+    
+    - [ ] if first 2 numbers no sorted, sa
+  
+  - [ ] while stack B still has nodes:
+    
+    - [ ] assign each node in B a target node (closest larger number / which number to put on top of) from A (so that A is constantly being sorted in ascending order)
+    
+    - [ ] if no larger number, target node is smallest number (considering stacks are a loop, when sorted in ascending order, the largest number is always immediately above the smallest number)
+    
+    - [ ] cost calculation, find which node is cheapest to push (ops to bring B node on top + ops to bring B's target node on top + 1 push op (cancelled out)), if found that cost is 0, straight away implement that
+    
+    - [ ] use rotate or reverse rotate only (if node is above halfway line, use rot, if below halfway line, use reverse rot)
+    
+    - [ ] if exactly on halfway line, follow the direction of the other, so that can use rr or rrr
+    
+    - [ ] if both A & B need to rotate in same direction, cost is the max of the 2 coz can rotate both simultaneously
+    
+    - [ ] repeat
+  
+  - [ ] rotate / rev rotate until min is on top (using halfway line rule)
+  
+  - [ ] cost calculation has no penalty because this projects only measured resource is number of instructions
+  
+  - [ ] free the stacks when done
 
 - [ ] write helper functions for turk
   
@@ -282,17 +327,27 @@ make sure your main file is the first one and everything else follows order, dep
     
     - [ ] 2 "3 4" 5
 
+- [ ] output:
+  
+  - [ ] instructions only separated by '\n'
+  
+  - [ ] must pass with checker for all benchmarks
+
 - [x] build
   
   - [x] libft.a created using its own makefile
   
   - [x] push_swap has its own Makefile that builds libft.a and its source files
 
-- [ ] instructions only separated by '\n'
-
-- [ ] number of instructions for 3 nums must be < 3
-
-- [ ] number of instructions for 5 nums must be > 12
+- [ ] Benchmarks:
+  
+  - [ ] number of instructions for 3 nums must be <= 3
+  
+  - [ ] number of instructions for 5 nums must be <= 12
+  
+  - [ ] number of instructions for 100 nums must be <= 700
+  
+  - [ ] number of instructions for 500 nums must be <= 5500
 
 - [ ] program must compile wth makefile
 
