@@ -6,24 +6,35 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 21:41:36 by belam             #+#    #+#             */
-/*   Updated: 2026/08/23 15:27:40 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/24 14:55:56 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "push_swap.h"
 
 // set closest smaller node to NULL because stack may NOT have smaller node
 t_node	*get_closest_smaller_node(t_stack *stack, int num)
 {
-	initialize closest smaller number node to NULL
-	while (traversing through stack)
-		if (this node number smaller than num)
-			if (this node number larger than closest smaller number)
-				update closest smaller number node to this node	
-
 	t_node	*closest_smaller_node;
 	t_node	*traverser;
 
 	closest_smaller_node = NULL;
 	traverser = stack->head;
+	while (traverser)
+	{
+		if (traverser->data < num)
+		{
+			if (closest_smaller_node ==  NULL)
+				closest_smaller_node = traverser;
+			else
+			{
+				if (traverser->data > closest_smaller_node->data)
+					closest_smaller_node = traverser;
+			}
+		}
+		traverser = traverser->next;
+	}
+	return (closest_smaller_node);
 }
 
 // initialize max_node to something because stack MUST have max
@@ -71,5 +82,7 @@ void turk(t_stack *stack_a, t_stack *stack_b)
 		select_op(stack_a, stack_b, "pb");
 
 		assign_target_for_a(stack_a, stack_b);
+		update_stack_index(stack_a);
+		update_stack_index(stack_b);
 	}
 }

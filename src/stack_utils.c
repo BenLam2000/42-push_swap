@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:35:28 by belam             #+#    #+#             */
-/*   Updated: 2026/08/18 19:16:23 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/24 14:49:37 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ This function creates a new stack node,
 places data in it, then links it to NULL
 next node in the linked list will simply override NULL
 */
-t_node	*create_node(int data, t_node *prev)
+t_node	*create_node(int data, unsigned int index, t_node *prev)
 {
 	t_node	*new_node;
 
@@ -25,6 +25,8 @@ t_node	*create_node(int data, t_node *prev)
 	if (!new_node)
 		return (NULL);
 	new_node->data = data;
+	new_node->index = index;
+	new_node->target = NULL;
 	new_node->prev = prev;
 	new_node->next = NULL;
 	return (new_node);
@@ -62,7 +64,7 @@ int	input_to_stack(char **endptr, t_stack *stackptr)
 			return (5);
 
 		// if no error, build new stack node
-		temp_node = create_node(num, stackptr->tail);
+		temp_node = create_node(num, stackptr->size, stackptr->tail);
 		if (!(temp_node))
 			return (8);
 		if (stackptr->size == 0)
@@ -87,6 +89,23 @@ int	input_to_stack(char **endptr, t_stack *stackptr)
 	if (is_sorted(stackptr))
 		return (7);
 	return (0);
+}
+
+void	update_stack_index(t_stack *stack)
+{
+	t_node	*traverser;
+
+	traverser = NULL;
+	if (stack->head)
+	{
+		stack->head->index = 0;
+		traverser = stack->head->next;
+	}
+	while (traverser)
+	{
+		traverser->index = traverser->prev->index + 1;	
+		traverser = traverser->next;
+	}
 }
 
 void	print_stack(t_stack *stack_a, t_stack *stack_b)

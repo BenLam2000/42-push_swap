@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/20 21:17:04 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/24 14:49:08 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,16 @@ int	main(int argc, char *argv[])
 	}
 
 	print_stack(&stack_a, &stack_b);
+	select_op(&stack_a, &stack_b, "pb");
+	select_op(&stack_a, &stack_b, "pb");
+	update_stack_index(&stack_a);
+	update_stack_index(&stack_b);
+
+	select_op(&stack_a, &stack_b, "pb");
+	select_op(&stack_a, &stack_b, "pb");
+	select_op(&stack_a, &stack_b, "pb");
+	get_closest_smaller_node(&stack_b, 5);
+	get_max_node(&stack_b);
 /*
 	char	buf[2];
 	int		bytes_read;
@@ -110,7 +120,7 @@ int	main(int argc, char *argv[])
 		//printf("%d\n", bytes_read);
 	}
 */
-///*
+/*
 	select_op(&stack_a, &stack_b, "pb");
 	select_op(&stack_a, &stack_b, "pb");
 	select_op(&stack_a, &stack_b, "pb");
@@ -124,7 +134,7 @@ int	main(int argc, char *argv[])
 	select_op(&stack_a, &stack_b, "pa");
 	select_op(&stack_a, &stack_b, "pa");
 	select_op(&stack_a, &stack_b, "pa");
-//*/
+*/
 	//printf("%d", input_is_invalid(endptr));
 	//num_count = parse_input(endptr, nums);
 
