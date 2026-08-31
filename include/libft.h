@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42iskandarputeri>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 19:58:17 by belam             #+#    #+#             */
-/*   Updated: 2025/10/30 04:10:21 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/31 16:24:57 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h> // malloc, also includes stddef.h -> size_t
 # include <unistd.h> // write
+# include <limits.h> // INT_MIN, INT_MAX
 
 // Part 1 functions
 int		ft_isalpha(int c);
@@ -53,5 +54,27 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+
+//############ user-defined #################
+//math 
+int		ft_abs(int num);
+int		ft_sign(int num);
+int		ft_max(int num1, int num2);
+int		ft_min(int num1, int num2);
+
+// string
+int		ft_strcmp(const char *s1, const char *s2);
+void	ft_append_char(char *str, char a);
+
+// arrays
+char	**ft_arrjoin(char **arr1, char **arr2);
+size_t	ft_arrlen(char **arr);
+int		ft_hasdups(int arr[], int len);
+int		ft_issorted(int arr[], int len);
+void	ft_free(char **strs);
+
+// parsing / conversion
+int		ft_atoi_imp(char *s);
+char	**ft_split_strict(char *s, char c);
 
 #endif

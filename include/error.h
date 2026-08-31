@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/30 23:52:42 by belam            ###   ########.fr       */
+/*   Created: 2026/08/29 17:17:46 by belam             #+#    #+#             */
+/*   Updated: 2026/08/31 11:46:28 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef ERROR_H
+# define ERROR_H
 
-int	main(int argc, char *argv[])
-{
-	t_stack	stack_a;
-	t_stack	stack_b;
+# define ERR_NO_ARGS 1
+# define ERR_SPACE 2
+# define ERR_OVERFLOW 3
+# define ERR_UNDERFLOW 4
+# define ERR_NON_INT 5
+# define ERR_SIZE 6
+# define ERR_DUP 7
+# define ERR_SORTED 8
+# define ERR_MALLOC 9
 
-	if (argc == 1)
-		return (1);
-	stack_a.head = NULL;
-	stack_a.tail = NULL;
-	stack_a.size = 0;
-	stack_b.head = NULL;
-	stack_b.tail = NULL;
-	stack_b.size = 0;
-	parse_input(argc, argv, &stack_a);
-	turk(&stack_a, &stack_b);
-	free_stack(&stack_a);
-	return (0);
-}
+void	ft_error(int exit_code);
+#endif

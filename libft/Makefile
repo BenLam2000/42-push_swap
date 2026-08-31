@@ -6,7 +6,7 @@
 #    By: belam <belam@student.42iskandarputeri.edu  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/26 03:07:24 by belam             #+#    #+#              #
-#    Updated: 2026/08/17 16:40:07 by belam            ###   ########.fr        #
+#    Updated: 2026/08/30 13:15:15 by belam            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,10 @@ SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c\
 	ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c\
 	ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c\
 	ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c\
-	ft_tolower.c ft_toupper.c
+	ft_tolower.c ft_toupper.c\
+	ft_strcmp.c ft_split_strict.c ft_arrlen.c ft_arrjoin.c ft_atoi_imp.c\
+	ft_error.c ft_atoi_imp.c ft_hasdups.c ft_issorted.c ft_abs.c ft_sign.c\
+	ft_max.c ft_min.c ft_append_char.c
 OBJ = $(addprefix $(BUILD_DIR)/,$(SRC:.c=.o))
 INCLUDE_DIR = ../include
 HEADER = $(INCLUDE_DIR)/libft.h

@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_issorted.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/13 16:57:26 by belam             #+#    #+#             */
-/*   Updated: 2026/08/30 23:52:42 by belam            ###   ########.fr       */
+/*   Created: 2026/08/30 11:39:16 by belam             #+#    #+#             */
+/*   Updated: 2026/08/30 15:40:19 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-int	main(int argc, char *argv[])
+int	ft_issorted(int arr[], int len)
 {
-	t_stack	stack_a;
-	t_stack	stack_b;
+	int	i;
 
-	if (argc == 1)
-		return (1);
-	stack_a.head = NULL;
-	stack_a.tail = NULL;
-	stack_a.size = 0;
-	stack_b.head = NULL;
-	stack_b.tail = NULL;
-	stack_b.size = 0;
-	parse_input(argc, argv, &stack_a);
-	turk(&stack_a, &stack_b);
-	free_stack(&stack_a);
-	return (0);
+	i = 1;
+	while (i < len)
+	{
+		if (arr[i - 1] > arr[i])
+			return (0);
+		i++;
+	}
+	return (1);
 }

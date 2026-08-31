@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42iskandarputeri.edu  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 15:49:05 by belam             #+#    #+#             */
-/*   Updated: 2025/10/30 03:56:32 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/27 21:51:42 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static int	ft_count_words(const char *s, char c)
 
 	word_count = 0;
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i])
 	{
 		while (s[i] == c)
 			i++;
-		if (s[i] != '\0')
+		if (s[i])
 			word_count++;
-		while (s[i] != c && s[i] != '\0')
+		while (s[i] != c && s[i])
 			i++;
 	}
 	return (word_count);

@@ -6,19 +6,15 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 20:03:57 by belam             #+#    #+#             */
-/*   Updated: 2026/08/20 21:21:19 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/31 17:18:37 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
-This function swaps the top 2 nodes of a stack,
-detaching and reattaching *prev and *next pointers
-*/
 // node1 and node2 are not NULL, checked to have min 2 nodes
 // edge case: only 2 nodes, tail will be severed and node3 has no prev
-static void	swap(t_stack *stack)
+void	swap(t_stack *stack)
 {
 	t_node	*node1;
 	t_node	*node2;
@@ -41,7 +37,7 @@ static void	swap(t_stack *stack)
 // check every dereference of t_node for NULL
 // check for reassignment of tail node also
 // edge cases: from_stack 1->0 nodes, to_stack 0->1 nodes: need to reassign tail
-static void	push(t_stack *from_stack, t_stack *to_stack)
+void	push(t_stack *from_stack, t_stack *to_stack)
 {
 	t_node	*push_node;
 	t_node	*from_stack_new_head;
@@ -67,7 +63,7 @@ static void	push(t_stack *from_stack, t_stack *to_stack)
 }
 
 // head and tail must exist since to rot must have >= 2 nodes
-static void	rot(t_stack *stack)
+void	rot(t_stack *stack)
 {
 	t_node	*old_head;
 	t_node	*old_tail;
@@ -83,7 +79,7 @@ static void	rot(t_stack *stack)
 }
 
 // head and tail must exist since to rot must have >= 2 nodes
-static void	rev_rot(t_stack *stack)
+void	rev_rot(t_stack *stack)
 {
 	t_node	*old_tail;
 	t_node	*old_head;
@@ -98,33 +94,4 @@ static void	rev_rot(t_stack *stack)
 	stack->head->next->prev = old_tail;
 	new_tail->next = NULL;
 	stack->tail = new_tail;
-}
-
-
-// CHG SIZE back to 3
-// TODO: change to strcmp
-void	select_op(t_stack *stack_a, t_stack *stack_b, char *op)
-{
-	if ((!ft_strncmp(op, "sa", 3) || !ft_strncmp(op, "ss", 3)) && stack_a->size >= 2)
-		swap(stack_a);
-	if ((!ft_strncmp(op, "sb", 3) || !ft_strncmp(op, "ss", 3)) && stack_b->size >= 2)
-		swap(stack_b);
-
-	if (ft_strncmp(op, "pa", 3) == 0 && stack_b->size)
-		push(stack_b, stack_a);
-	else if (ft_strncmp(op, "pb", 3) == 0 && stack_a->size)
-		push(stack_a, stack_b);
-
-	if ((!ft_strncmp(op, "ra", 3) || !ft_strncmp(op, "rr", 3)) && stack_a->size >= 2)
-		rot(stack_a);
-	if ((!ft_strncmp(op, "rb", 3) || !ft_strncmp(op, "rr", 3)) && stack_b->size >= 2)
-		rot(stack_b);
-
-	if ((!ft_strncmp(op, "rra", 3) || !ft_strncmp(op, "rrr", 3)) && stack_a->size >= 2)
-		rev_rot(stack_a);
-	if ((!ft_strncmp(op, "rrb", 3) || !ft_strncmp(op, "rrr", 3)) && stack_b->size >= 2)
-		rev_rot(stack_b);
-
-	printf("%s\n", op);
-	print_stack(stack_a, stack_b);
 }

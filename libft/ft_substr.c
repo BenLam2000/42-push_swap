@@ -6,7 +6,7 @@
 /*   By: belam <belam@student.42iskandarputeri.edu  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 17:34:21 by belam             #+#    #+#             */
-/*   Updated: 2025/10/30 01:03:56 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/31 12:28:23 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		substr_len = ft_strlen(s) - start;
 	else
 		substr_len = len;
-	substr = (char *)malloc(substr_len * sizeof(char) + 1);
+	substr = (char *)malloc((substr_len + 1) * sizeof(char));
 	if (!substr)
 		return ((char *)0);
 	i = start;
 	end = (int)start + (int)substr_len - 1;
-	while (i <= end && len > 0)
+	while (i <= end)
 	{
 		substr[i - start] = s[i];
 		i++;

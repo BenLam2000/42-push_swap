@@ -6,49 +6,81 @@
 /*   By: belam <belam@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/04 13:18:57 by belam             #+#    #+#             */
-/*   Updated: 2026/08/24 14:50:03 by belam            ###   ########.fr       */
+/*   Updated: 2026/08/31 17:12:06 by belam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> // DEL
-#include <stdlib.h>
-#include <unistd.h>
-#include <limits.h> // DEL
-#include <stdbool.h>
-#include "libft.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-typedef struct s_node 
+# include <stdlib.h> // malloc, free, exit
+
+typedef struct s_node
 {
 	int				data;
 	unsigned int	index;
 	struct s_node	*target;
 	struct s_node	*next;
 	struct s_node	*prev;
-} t_node;
+}	t_node;
 
-typedef struct	s_stack
+typedef struct s_stack
 {
-	t_node			*head;
-	t_node			*tail;
-	unsigned int	size;
-} t_stack;
+	t_node	*head;
+	t_node	*tail;
+	size_t	size;
+}	t_stack;
 
-typedef struct	s_ops
+// op needs to be full op, including 'a' or 'b'
+typedef struct s_op_count
 {
-	bool			node_rot;
-	unsigned int	node_rot_count;
-	bool 			target_rot;
-	unsigned int	target_rot_count;
-} t_ops;
+	char			dir[3];
+	char			stack_char;
+	char			op[4];
+	unsigned int	count;
+}	t_op_count;
 
-t_node	*create_node(int data, unsigned int index, t_node *prev);
-int		input_to_stack(char **endptr, t_stack *stackptr);
-void	print_stack(t_stack *stack_a, t_stack *stack_b);
-int		ft_atoi_imp(char *s, char **endptr);
-int		is_input_invalid(char *endptr, char *endptr_prev);
-int		is_sorted(t_stack *stackptr);
-int		has_duplicate(t_stack *stackptr, int num);
-void	select_op(t_stack *stack_a, t_stack *stack_b, char *op);
-t_node	*get_closest_smaller_node(t_stack *stack, int num);
-t_node	*get_max_node(t_stack *stack);
-void	update_stack_index(t_stack *stack);
+// op1 = cur_stack initially, but may change if optimized
+typedef struct s_ops
+{
+	char		cur_stack_char;
+	char		target_stack_char;
+	t_op_count	op1;
+	t_op_count	op2;
+}	t_ops;
+
+// stack utils
+void			create_stack(int *num_arr, size_t len, t_stack *stack);
+void			update_stack_index(t_stack *stack);
+unsigned int	index_of_max(t_stack *stack);
+int				stack_sorted(t_stack *stack);
+void			free_stack(t_stack *stack);
+
+// input
+void			parse_input(int argc, char **argv, t_stack *stack);
+void			arr_sorted(int arr[], int len);
+void			arr_duplicates(int arr[], int len);
+
+// operations
+void			swap(t_stack *stack);
+void			push(t_stack *from_stack, t_stack *to_stack);
+void			rot(t_stack *stack);
+void			rev_rot(t_stack *stack);
+void			do_op(t_stack *stack_a, t_stack *stack_b, char *op);
+void			repeat_op(t_stack *stack_a, t_stack *stack_b, char *op,\
+	unsigned int count);
+
+// turk
+t_node			*ft_max_node(t_stack *stack);
+t_node			*ft_min_node(t_stack *stack);
+t_op_count		min_op(t_stack *stack, unsigned int old_index,\
+	unsigned int new_index);
+void			assign_target(t_stack *cur_stack, t_stack *target_stack,\
+	int smaller);
+void			calc_cheapest_op(t_stack *cur_stack, t_stack *target_stack,\
+	t_ops *ops);
+void			turk(t_stack *stack_a, t_stack *stack_b);
+
+// error
+void			ft_error(int exit_code);
+#endif
